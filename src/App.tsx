@@ -7,7 +7,8 @@ import Accordion from "./components/Accordion";
 function App() {
   return (
     <div className="App">
-        <Accordion titleForAccordion={'Menu'}/>
+        <Accordion titleForAccordion={'Menu'} collapsed={true}/>
+        <Accordion titleForAccordion={'Users'} collapsed={false}/>
         <Rating valueOfStar={5}/>
     </div>
   );

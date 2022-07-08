@@ -1,3 +1,12 @@
+body {
+    background-color: #16171b;
+    color: #bbbbbb;
+}
+
+ul {
+    list-style-type: none;
+}
+
 .App {
     margin: 0 auto;
     width: 90vw;
@@ -6,12 +15,22 @@
 }
 
 .star {
+    display: inline-block;
     padding: 5px;
     cursor: pointer;
+    width: 20px;
+    height: 20px;
+    fill: #bbbbbb;
+}
+
+.selected {
+    fill: #5f8120;
 }
 
 .accordion {
-    background: aquamarine;
+    border: 2px solid #5f8120;
     width: 10%;
     height: 150px;
+    padding: 10px;
+    border-radius: 10px;
 }

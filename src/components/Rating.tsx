@@ -1,71 +1,75 @@
 import React from "react";
 import Star from "./Star";
 
-function Rating(props: any) {
+type RatingPropsType = {
+    valueOfStar: 0|1|2|3|4|5
+}
+
+function Rating(props: RatingPropsType) {
     switch (props.valueOfStar) {
         case 1: {
             return (
                 <div className="raiting">
-                    <Star value={'selected'}/>
-                    <Star />
-                    <Star />
-                    <Star />
-                    <Star />
+                    <Star value = {true}/>
+                    <Star value = {false}/>
+                    <Star value = {false}/>
+                    <Star value = {false}/>
+                    <Star value = {false}/>
                 </div>
             );
         }
         case 2: {
             return (
                 <div className="raiting">
-                    <Star value={'selected'}/>
-                    <Star value={'selected'}/>
-                    <Star />
-                    <Star />
-                    <Star />
+                    <Star value = {true}/>
+                    <Star value = {true}/>
+                    <Star value = {false}/>
+                    <Star value = {false}/>
+                    <Star value = {false}/>
                 </div>
             );
         }
         case 3: {
             return (
                 <div className="raiting">
-                    <Star value={'selected'}/>
-                    <Star value={'selected'}/>
-                    <Star value={'selected'}/>
-                    <Star />
-                    <Star />
+                    <Star value = {true}/>
+                    <Star value = {true}/>
+                    <Star value = {true}/>
+                    <Star value = {false}/>
+                    <Star value = {false}/>
                 </div>
             );
         }
         case 4: {
             return (
                 <div className="raiting">
-                    <Star value={'selected'}/>
-                    <Star value={'selected'}/>
-                    <Star value={'selected'}/>
-                    <Star value={'selected'}/>
-                    <Star />
+                    <Star value = {true}/>
+                    <Star value = {true}/>
+                    <Star value = {true}/>
+                    <Star value = {true}/>
+                    <Star value = {false}/>
                 </div>
             );
         }
         case 5: {
             return (
                 <div className="raiting">
-                    <Star value={'selected'}/>
-                    <Star value={'selected'}/>
-                    <Star value={'selected'}/>
-                    <Star value={'selected'}/>
-                    <Star value={'selected'}/>
+                    <Star value = {true}/>
+                    <Star value = {true}/>
+                    <Star value = {true}/>
+                    <Star value = {true}/>
+                    <Star value = {true}/>
                 </div>
             );
         }
         default : {
             return (
                 <div className="raiting">
-                    <Star />
-                    <Star />
-                    <Star />
-                    <Star />
-                    <Star />
+                    <Star value = {false}/>
+                    <Star value = {false}/>
+                    <Star value = {false}/>
+                    <Star value = {false}/>
+                    <Star value = {false}/>
                 </div>
             );
         }
