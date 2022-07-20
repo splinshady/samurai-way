@@ -1,17 +1,14 @@
 body {
-    background-color: #16171b;
-    color: #bbbbbb;
 }
 
 ul {
     list-style-type: none;
 }
 
-.App {
-    margin: 0 auto;
-    width: 90vw;
+.container {
     display: flex;
-    padding-top: 50px;
+    width: 1200px;
+    margin: 0 auto;
 }
 
 .star {

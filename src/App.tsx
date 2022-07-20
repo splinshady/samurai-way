@@ -1,15 +1,17 @@
 import React from 'react';
 import './App.css';
-import Rating from "./components/Rating";
-import Accordion from "./components/Accordion";
-
+import Header from "./components/header/Header";
+import Navbar from "./components/navbar/Navbar";
+import Profile from "./components/profile/Profile";
 
 function App() {
   return (
     <div className="App">
-        <Accordion titleForAccordion={'Menu'} collapsed={true}/>
-        <Accordion titleForAccordion={'Users'} collapsed={false}/>
-        <Rating valueOfStar={5}/>
+        <Header />
+        <div className="container">
+            <Navbar />
+            <Profile />
+        </div>
     </div>
   );
 }
