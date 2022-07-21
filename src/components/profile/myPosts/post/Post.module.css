@@ -1,5 +1,17 @@
 .post {
-    width: 300px;
-    height: 100px;
+    display: flex;
     background-color: #214a6e;
+    color: aliceblue;
+}
+
+.avatar {
+    width: auto;
+    height: 50px;
+}
+
+.post__content {
+}
+
+.post__like {
+
 }
