@@ -5,7 +5,7 @@ import MyPosts from "./myPosts/MyPosts";
 
 const Profile = () => {
     return (
-        <div className={style.profile}>
+        <div className={style.profile + ' shadow_section'}>
             <MyPosts />
         </div>
     );

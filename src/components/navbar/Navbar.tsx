@@ -3,7 +3,7 @@ import style from './Navbar.module.css';
 
 const Navbar = () => {
     return (
-        <nav className={style.navbar}>
+        <nav className={style.navbar + ' shadow_section'}>
 
         </nav>
     );
