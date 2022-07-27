@@ -1,0 +1,58 @@
+.message {
+    width: 100%;
+    padding: 10px 15px;
+}
+
+.message__container {
+    display: flex;
+    overflow: hidden;
+}
+
+.message__block {
+    display: flex;
+    justify-content: space-between;
+    background-color: #75bdbe;
+    padding: 5px 10px;
+    margin-left: 15px;
+    border-radius: 5px;
+    position: relative;
+    border-bottom-left-radius: 0px;
+}
+
+.message__block:before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    bottom: -1px;
+    left: -20px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 3px 3px 0 3px #75bdbe;
+}
+
+.message__name_text {
+    display: flex;
+    flex-direction: column;
+    margin-right: 5px;
+}
+
+.message__avatar {
+    width: 40px;
+    height: 100%;
+    border-radius: 50%;
+    align-self: flex-end;
+}
+
+.message__time {
+    font-size: 10px;
+    align-self: flex-end;
+}
+
+.message__name {
+    color: #9168de;
+}
+
+.message__text {
+
+}
