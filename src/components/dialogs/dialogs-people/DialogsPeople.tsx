@@ -1,14 +1,16 @@
 import React from 'react';
 import style from './DialogsPeople.module.css';
 import PersonDialog from "./person-dialog/PersonDialog";
+import {dialogsType} from "../../../state/state";
 
-const DialogsPeople = () => {
+type DialogsPeoplePropsType = {
+    state: Array<dialogsType>
+}
+
+const DialogsPeople = (props: DialogsPeoplePropsType) => {
     return (
         <div className={style.dialogs_container + ' shadow_section'}>
-            <PersonDialog id={1} name={"Dima"}/>
-            <PersonDialog id={2} name={"Kostia"}/>
-            <PersonDialog id={3} name={"Sergey"}/>
-            <PersonDialog id={4} name={"Egor"}/>
+            {props.state.map(person => <PersonDialog key={person.id} id={person.id} name={person.name}/>)}
         </div>
     );
 };

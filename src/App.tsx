@@ -5,15 +5,20 @@ import Navbar from "./components/navbar/Navbar";
 import Profile from "./components/profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
 import Dialogs from "./components/dialogs/Dialogs";
+import {stateType} from "./state/state";
 
-function App() {
+type AppPropsType = {
+    state: stateType,
+}
+
+function App (props: AppPropsType) {
     return (
         <BrowserRouter>
             <div className="App">
                 <Header/>
                 <Navbar/>
-                <Route path='/dialogs' component={Dialogs}/>
-                <Route path='/profile' component={Profile}/>
+                <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage}/>}/>
+                <Route path='/profile' render={() => <Profile />}/>
             </div>
         </BrowserRouter>
     );
