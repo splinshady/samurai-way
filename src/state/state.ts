@@ -1,9 +1,12 @@
+import {v1} from "uuid";
+import {renderTree} from "../render";
+
 export type dialogsType = {
-    id: number,
+    id: string,
     name: string,
 }
 export type messageType = {
-    id: number,
+    id: string,
     message: string,
     name: string
 }
@@ -27,31 +30,41 @@ export const state: stateType = {
     ],
     dialogsPage: {
         dialogs: [
-            {id: 1, name: 'Dima'},
-            {id: 2, name: 'Ed'}
+            {id: '1', name: 'Dima'},
+            {id: '2', name: 'Ed'}
         ],
         messages: [
-            {id: 1, message: 'hi', name: 'Dima'},
+            {id: '1', message: 'hi', name: 'Dima'},
             {
-                id: 2,
+                id: '2',
                 name: 'Dima',
                 message: 'CSS всегда использовался для разметки веб- хорошо.'
             },
             {
-                id: 3,
+                id: '3',
                 name: 'Dima',
                 message: 'CSS всегда использовался для разметки веб- хорошо.'
             },
             {
-                id: 4,
+                id: '4',
                 name: 'Dima',
                 message: 'CSS всегда использовался для разметки веб- хорошо.'
             },
             {
-                id: 5,
+                id: '5',
                 name: 'Dima',
                 message: 'CSS всегда использовался для разметки веб- хорошо.'
             },
         ],
     }
+}
+
+export const addMessage = (mess: string) => {
+    const message: messageType = {
+        id: v1(),
+        name: 'Dima',
+        message: mess
+    }
+    state.dialogsPage.messages.push(message)
+    renderTree(state)
 }

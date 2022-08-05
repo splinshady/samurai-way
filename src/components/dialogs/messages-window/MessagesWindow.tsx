@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import styles from './MessagesWindow.module.css'
 import Message from "./message/Message";
 import style from "../dialogs-people/person-dialog/PersonDialog.module.css";
@@ -6,9 +6,22 @@ import {messageType} from "../../../state/state";
 
 type MessagesWindowPropsType = {
     state: Array<messageType>
+    addMessage: (mess: string) => void
 }
 
 const MessagesWindow = (props: MessagesWindowPropsType) => {
+
+    const [messInputValue, setMessInputValue] = useState<string>('')
+
+    const sendMessageClickHandler = () => {
+        props.addMessage(messInputValue)
+        setMessInputValue('')
+    }
+
+    const changeMessageHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        setMessInputValue(event.currentTarget.value)
+    }
+
     return (
         <div className={styles.messages_container + ' shadow_section'}>
             <section className={styles.header}>
@@ -28,8 +41,8 @@ const MessagesWindow = (props: MessagesWindowPropsType) => {
             </section>
 
             <section className={styles.input_container}>
-                <textarea className={styles.input_textarea}></textarea>
-                <button>send</button>
+                <textarea value={messInputValue} onChange={changeMessageHandler} className={styles.input_textarea}></textarea>
+                <button onClick={sendMessageClickHandler}>send</button>
             </section>
         </div>
     );

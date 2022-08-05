@@ -9,6 +9,7 @@ import {stateType} from "./state/state";
 
 type AppPropsType = {
     state: stateType,
+    addMessage: (mess: string) => void
 }
 
 function App (props: AppPropsType) {
@@ -17,7 +18,7 @@ function App (props: AppPropsType) {
             <div className="App">
                 <Header/>
                 <Navbar/>
-                <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage}/>}/>
+                <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} addMessage={props.addMessage}/>}/>
                 <Route path='/profile' render={() => <Profile />}/>
             </div>
         </BrowserRouter>

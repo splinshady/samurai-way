@@ -3,7 +3,7 @@ import style from './PersonDialog.module.css';
 import {NavLink} from "react-router-dom";
 
 type PersonDialogType = {
-    id: number,
+    id: string,
     name: string
 }
 

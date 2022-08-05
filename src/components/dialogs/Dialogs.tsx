@@ -9,12 +9,13 @@ type DialogsPropsType = {
         dialogs: Array<dialogsType>,
         messages: Array<messageType>,
     }
+    addMessage: (mess: string) => void
 }
 
 const Dialogs = (props: DialogsPropsType) => {
     return (
         <div className={style.dialogs}>
-            <MessagesWindow state={props.state.messages}/>
+            <MessagesWindow state={props.state.messages} addMessage={props.addMessage}/>
             <DialogsPeople state={props.state.dialogs}/>
         </div>
     );
