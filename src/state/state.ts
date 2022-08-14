@@ -1,5 +1,4 @@
 import {v1} from "uuid";
-import {renderTree} from "../render";
 
 export type dialogsType = {
     id: string,
@@ -59,6 +58,12 @@ export const state: stateType = {
     }
 }
 
+let renderTree = (state: stateType) => {}
+
+export const subscribe = (observer: any) => {
+    renderTree = observer;
+}
+
 export const addMessage = (mess: string) => {
     const message: messageType = {
         id: v1(),
@@ -66,5 +71,5 @@ export const addMessage = (mess: string) => {
         message: mess
     }
     state.dialogsPage.messages.push(message)
-    renderTree(state)
+    renderTree(state);
 }
