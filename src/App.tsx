@@ -19,7 +19,7 @@ function App(props: AppPropsType) {
                 <Header/>
                 <Navbar/>
                 <Route path='/dialogs' render={() => <Dialogs state={state.dialogsPage}
-                                                              addMessage={props.store.addMessage.bind(props.store)}/>}/>
+                                                              dispatch={props.store.dispatch.bind(props.store)}/>}/>
                 <Route path='/profile' render={() => <Profile/>}/>
             </div>
         </BrowserRouter>

@@ -9,12 +9,10 @@ export type messageType = {
     message: string,
     name: string
 }
-
 export type postType = {
     message: string,
     likesCount: number
 }
-
 export type stateType = {
     profilePage: Array<postType>;
     dialogsPage: {
@@ -22,14 +20,19 @@ export type stateType = {
         messages: Array<messageType>,
     }
 }
-
 export type storeType = {
     _state: stateType,
-    addMessage: (mess: string) => void,
     _onChange: () => void,
     subscribe: (observer: () => void) => void,
     getState: () => stateType,
+    dispatch: (action: ActionsTypes) => void,
 }
+export type ActionsTypes = AddMessageActionType
+export type AddMessageActionType = {
+    type: 'ADD-MESSAGE',
+    message: string,
+}
+
 
 export const store: storeType = {
     _state: {
@@ -66,22 +69,24 @@ export const store: storeType = {
             ],
         }
     },
-    addMessage(mess: string) {
-        const message: messageType = {
-            id: v1(),
-            name: 'Dima',
-            message: mess
-        }
-        this._state.dialogsPage.messages.push(message)
-        this._onChange()
-    },
-    _onChange() {
-    },
-
+    _onChange() {},
     subscribe(observer) {
         this._onChange = observer
     },
     getState() {
         return this._state
-    }
+    },
+    dispatch (action: ActionsTypes) {
+        switch (action.type) {
+            case 'ADD-MESSAGE' : {
+                const message: messageType = {
+                    id: v1(),
+                    name: 'Dima',
+                    message: action.message
+                }
+                this._state.dialogsPage.messages.push(message)
+                this._onChange()
+            }
+        }
+    },
 }

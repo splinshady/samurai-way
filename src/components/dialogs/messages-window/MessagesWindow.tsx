@@ -2,11 +2,11 @@ import React, {ChangeEvent, useState} from 'react';
 import styles from './MessagesWindow.module.css'
 import Message from "./message/Message";
 import style from "../dialogs-people/person-dialog/PersonDialog.module.css";
-import {messageType} from "../../../state/state";
+import {ActionsTypes, messageType} from "../../../state/state";
 
 type MessagesWindowPropsType = {
     state: Array<messageType>
-    addMessage: (mess: string) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 const MessagesWindow = (props: MessagesWindowPropsType) => {
@@ -14,7 +14,7 @@ const MessagesWindow = (props: MessagesWindowPropsType) => {
     const [messInputValue, setMessInputValue] = useState<string>('')
 
     const sendMessageClickHandler = () => {
-        props.addMessage(messInputValue)
+        props.dispatch({type: 'ADD-MESSAGE', message: messInputValue})
         setMessInputValue('')
     }
 
