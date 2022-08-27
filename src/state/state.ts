@@ -27,12 +27,15 @@ export type storeType = {
     getState: () => stateType,
     dispatch: (action: ActionsTypes) => void,
 }
-export type ActionsTypes = AddMessageActionType
-export type AddMessageActionType = {
-    type: 'ADD-MESSAGE',
-    message: string,
-}
 
+export type ActionsTypes = ReturnType<typeof addMessageAC>
+
+export const addMessageAC = (messInputValue: string) => {
+    return {
+        type: 'ADD-MESSAGE',
+        message: messInputValue
+    } as const
+}
 
 export const store: storeType = {
     _state: {
