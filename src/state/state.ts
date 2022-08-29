@@ -1,4 +1,5 @@
 import {v1} from "uuid";
+import {addMessageAC, dialogsReducer} from "./dialogs-reduser";
 
 export type dialogsType = {
     id: string,
@@ -30,12 +31,6 @@ export type storeType = {
 
 export type ActionsTypes = ReturnType<typeof addMessageAC>
 
-export const addMessageAC = (messInputValue: string) => {
-    return {
-        type: 'ADD-MESSAGE',
-        message: messInputValue
-    } as const
-}
 
 export const store: storeType = {
     _state: {
@@ -80,16 +75,7 @@ export const store: storeType = {
         return this._state
     },
     dispatch (action: ActionsTypes) {
-        switch (action.type) {
-            case 'ADD-MESSAGE' : {
-                const message: messageType = {
-                    id: v1(),
-                    name: 'Dima',
-                    message: action.message
-                }
-                this._state.dialogsPage.messages.push(message)
-                this._onChange()
-            }
-        }
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._onChange()
     },
 }
