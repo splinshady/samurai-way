@@ -1,7 +1,37 @@
 import {v1} from "uuid";
-import {messageType} from "./state";
+import {dialogsPageType, messageType} from "./state";
 
-export const dialogsReducer = (state: any, action: any): any => {
+const initialState = {
+    dialogs: [
+        {id: '1', name: 'Dima'},
+        {id: '2', name: 'Ed'}
+    ],
+    messages: [
+        {id: '1', message: 'hi', name: 'Dima'},
+        {
+            id: '2',
+            name: 'Dima',
+            message: 'CSS всегда использовался для разметки веб- хорошо.'
+        },
+        {
+            id: '3',
+            name: 'Dima',
+            message: 'CSS всегда использовался для разметки веб- хорошо.'
+        },
+        {
+            id: '4',
+            name: 'Dima',
+            message: 'CSS всегда использовался для разметки веб- хорошо.'
+        },
+        {
+            id: '5',
+            name: 'Dima',
+            message: 'CSS всегда использовался для разметки веб- хорошо.'
+        },
+    ],
+}
+
+export const dialogsReducer = (state: dialogsPageType = initialState, action: any): any => {
     switch (action.type) {
         case 'ADD-MESSAGE' : {
             const message: messageType = {

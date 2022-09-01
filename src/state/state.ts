@@ -14,12 +14,13 @@ export type postType = {
     message: string,
     likesCount: number
 }
+export type dialogsPageType = {
+    dialogs: Array<dialogsType>,
+    messages: Array<messageType>,
+}
 export type stateType = {
     profilePage: Array<postType>;
-    dialogsPage: {
-        dialogs: Array<dialogsType>,
-        messages: Array<messageType>,
-    }
+    dialogsPage: dialogsPageType
 }
 export type storeType = {
     _state: stateType,
