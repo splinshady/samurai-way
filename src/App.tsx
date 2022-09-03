@@ -4,22 +4,20 @@ import Header from "./components/header/Header";
 import Navbar from "./components/navbar/Navbar";
 import Profile from "./components/profile/Profile";
 import {BrowserRouter, Route} from "react-router-dom";
-import Dialogs from "./components/dialogs/Dialogs";
 import {storeType} from "./state/state";
+import DialogsContainer from "./components/dialogs/DialogsContainer";
 
 type AppPropsType = {
     store: storeType,
 }
 
 function App(props: AppPropsType) {
-    const state = props.store.getState()
     return (
         <BrowserRouter>
             <div className="App">
                 <Header/>
                 <Navbar/>
-                <Route path='/dialogs' render={() => <Dialogs state={state.dialogsPage}
-                                                              dispatch={props.store.dispatch.bind(props.store)}/>}/>
+                <Route path='/dialogs' render={() => <DialogsContainer store={props.store}/>}/>
                 <Route path='/profile' render={() => <Profile/>}/>
             </div>
         </BrowserRouter>

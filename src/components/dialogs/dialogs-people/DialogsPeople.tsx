@@ -4,13 +4,13 @@ import PersonDialog from "./person-dialog/PersonDialog";
 import {dialogsType} from "../../../state/state";
 
 type DialogsPeoplePropsType = {
-    state: Array<dialogsType>
+    dialogs: Array<dialogsType>
 }
 
 const DialogsPeople = (props: DialogsPeoplePropsType) => {
     return (
         <div className={style.dialogs_container + ' shadow_section'}>
-            {props.state.map(person => <PersonDialog key={person.id} id={person.id} name={person.name}/>)}
+            {props.dialogs.map(person => <PersonDialog key={person.id} id={person.id} name={person.name}/>)}
         </div>
     );
 };

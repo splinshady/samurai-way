@@ -6,8 +6,8 @@ import {ActionsTypes, messageType} from "../../../state/state";
 import {addMessageAC} from "../../../state/dialogs-reduser";
 
 type MessagesWindowPropsType = {
-    state: Array<messageType>
-    dispatch: (action: ActionsTypes) => void
+    messages: Array<messageType>
+    sendMessage: (newMessage: string) => void
 }
 
 const MessagesWindow = (props: MessagesWindowPropsType) => {
@@ -15,7 +15,7 @@ const MessagesWindow = (props: MessagesWindowPropsType) => {
     const [messInputValue, setMessInputValue] = useState<string>('')
 
     const sendMessageClickHandler = () => {
-        props.dispatch(addMessageAC(messInputValue))
+        props.sendMessage(messInputValue)
         setMessInputValue('')
     }
 
@@ -31,7 +31,7 @@ const MessagesWindow = (props: MessagesWindowPropsType) => {
             </section>
 
             <section className={styles.body}>
-                {props.state.map(message => {
+                {props.messages.map(message => {
                     return <Message key={message.id}
                         avatar={'https://cdn-icons-png.flaticon.com/512/145/145847.png'}
                         name={message.name}

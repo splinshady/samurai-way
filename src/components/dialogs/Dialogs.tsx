@@ -5,18 +5,16 @@ import DialogsPeople from "./dialogs-people/DialogsPeople";
 import {ActionsTypes, dialogsType, messageType} from "../../state/state";
 
 type DialogsPropsType = {
-    state: {
-        dialogs: Array<dialogsType>,
-        messages: Array<messageType>,
-    }
-    dispatch: (action: ActionsTypes) => void
+    dialogs: Array<dialogsType>,
+    messages: Array<messageType>,
+    sendMessage: (newMessage: string) => void
 }
 
 const Dialogs = (props: DialogsPropsType) => {
     return (
         <div className={style.dialogs}>
-            <MessagesWindow state={props.state.messages} dispatch={props.dispatch}/>
-            <DialogsPeople state={props.state.dialogs}/>
+            <MessagesWindow messages={props.messages} sendMessage={props.sendMessage}/>
+            <DialogsPeople dialogs={props.dialogs}/>
         </div>
     );
 };
