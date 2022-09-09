@@ -1,39 +1,38 @@
 import {v1} from "uuid";
 import {addMessageAC, dialogsReducer} from "./dialogs-reduser";
 
-export type dialogsType = {
+/*export type dialogsType = {
     id: string,
     name: string,
-}
-export type messageType = {
+}*/
+/*export type messageType = {
     id: string,
     message: string,
     name: string
-}
-export type postType = {
+}*/
+/*export type postType = {
     message: string,
     likesCount: number
-}
-export type dialogsPageType = {
+}*/
+/*export type dialogsPageType = {
     dialogs: Array<dialogsType>,
     messages: Array<messageType>,
-}
-export type stateType = {
+}*/
+/*export type stateType = {
     profilePage: Array<postType>;
     dialogsPage: dialogsPageType
-}
-export type storeType = {
+}*/
+/*export type storeType = {
     _state: stateType,
     _onChange: () => void,
     subscribe: (observer: () => void) => void,
     getState: () => stateType,
     dispatch: (action: ActionsTypes) => void,
-}
+}*/
+/*export type ActionsTypes = ReturnType<typeof addMessageAC>*/
 
-export type ActionsTypes = ReturnType<typeof addMessageAC>
 
-
-export const store: storeType = {
+/*export const store: storeType = {
     _state: {
         profilePage: [
             {message: 'my first post', likesCount: 245},
@@ -79,4 +78,4 @@ export const store: storeType = {
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._onChange()
     },
-}
+}*/

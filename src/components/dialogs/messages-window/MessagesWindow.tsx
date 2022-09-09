@@ -2,8 +2,7 @@ import React, {ChangeEvent, useState} from 'react';
 import styles from './MessagesWindow.module.css'
 import Message from "./message/Message";
 import style from "../dialogs-people/person-dialog/PersonDialog.module.css";
-import {ActionsTypes, messageType} from "../../../state/state";
-import {addMessageAC} from "../../../state/dialogs-reduser";
+import {messageType} from "../../../state/redux-store";
 
 type MessagesWindowPropsType = {
     messages: Array<messageType>
