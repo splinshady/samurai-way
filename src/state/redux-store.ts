@@ -1,5 +1,6 @@
 import {combineReducers, createStore} from "redux";
 import {addMessageAC, dialogsReducer} from "./dialogs-reduser";
+import {followAC, setUsersAC, unfollowAC, usersReducer} from "./users-reducer";
 
 export type dialogsType = {
     id: string,
@@ -18,15 +19,18 @@ export type dialogsPageType = {
     dialogs: Array<dialogsType>,
     messages: Array<messageType>,
 }
-export type stateType = {
-    profilePage: Array<postType>;
-    dialogsPage: dialogsPageType
-}
-export type ActionsTypes = ReturnType<typeof addMessageAC>
 
-const reducers = combineReducers({
-    dialogsPage: dialogsReducer
+export type ActionsTypes = ReturnType<typeof addMessageAC
+    | typeof followAC
+    | typeof unfollowAC
+    | typeof setUsersAC>
+
+export type stateType = ReturnType<typeof rootReducer>
+
+const rootReducer = combineReducers({
+    dialogsPage: dialogsReducer,
+    usersPage: usersReducer
 })
 
-export const store = createStore(reducers)
+export const store = createStore(rootReducer)
 

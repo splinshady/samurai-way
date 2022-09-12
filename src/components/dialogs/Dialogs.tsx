@@ -2,13 +2,7 @@ import React from 'react';
 import style from './Dialogs.module.css';
 import MessagesWindow from "./messages-window/MessagesWindow";
 import DialogsPeople from "./dialogs-people/DialogsPeople";
-import {dialogsType, messageType} from "../../state/redux-store";
-
-type DialogsPropsType = {
-    dialogs: Array<dialogsType>,
-    messages: Array<messageType>,
-    sendMessage: (newMessage: string) => void
-}
+import {DialogsPropsType} from "./DialogsContainer";
 
 const Dialogs = (props: DialogsPropsType) => {
     return (
