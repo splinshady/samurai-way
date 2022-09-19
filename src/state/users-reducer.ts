@@ -1,19 +1,17 @@
 import {v1} from "uuid";
 import {ActionsTypes} from "./redux-store";
 
-export type LocationType = {
-    city: string,
-    country: string
+export type PhotosType = {
+    small: string,
+    large: string
 }
 
 export type UserType = {
     id: string,
-    photoUrl: string
+    photos: PhotosType
     followed: boolean,
-    firstName: string,
-    lastName: string,
+    name: string,
     status: string,
-    location: LocationType,
 }
 
 export type UsersPageType = {
