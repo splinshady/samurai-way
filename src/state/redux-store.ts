@@ -1,6 +1,6 @@
 import {combineReducers, createStore} from "redux";
 import {addMessageAC, dialogsReducer} from "./dialogs-reduser";
-import {followAC, setUsersAC, unfollowAC, usersReducer} from "./users-reducer";
+import {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC, usersReducer} from "./users-reducer";
 
 export type dialogsType = {
     id: string,
@@ -23,6 +23,8 @@ export type dialogsPageType = {
 export type ActionsTypes = ReturnType<typeof addMessageAC
     | typeof followAC
     | typeof unfollowAC
+    | typeof setTotalUsersCountAC
+    | typeof setCurrentPageAC
     | typeof setUsersAC>
 
 export type stateType = ReturnType<typeof rootReducer>
