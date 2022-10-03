@@ -9,6 +9,7 @@ import {
     unfollow,
     usersReducer
 } from "./users-reducer";
+import {profileReducer, setUserProfile} from "./profile-reducer";
 
 export type dialogsType = {
     id: string,
@@ -34,13 +35,15 @@ export type ActionsTypes = ReturnType<typeof addMessageAC
     | typeof setTotalUsersCount
     | typeof setCurrentPage
     | typeof setIsFetching
+    | typeof setUserProfile
     | typeof setUsers>
 
 export type stateType = ReturnType<typeof rootReducer>
 
 const rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    profilePage: profileReducer,
 })
 
 export const store = createStore(rootReducer)

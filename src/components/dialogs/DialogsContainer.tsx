@@ -9,7 +9,6 @@ type MapStatePropsType = {
     dialogs: Array<dialogsType>,
     messages: Array<messageType>,
 }
-
 type MapDispatchPropsType = {
     sendMessage: (newMessage: string) => void
 }
