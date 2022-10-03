@@ -1,12 +1,12 @@
 import {combineReducers, createStore} from "redux";
 import {addMessageAC, dialogsReducer} from "./dialogs-reduser";
 import {
-    followAC,
-    setCurrentPageAC,
-    setIsFetchingAC,
-    setTotalUsersCountAC,
-    setUsersAC,
-    unfollowAC,
+    follow,
+    setCurrentPage,
+    setIsFetching,
+    setTotalUsersCount,
+    setUsers,
+    unfollow,
     usersReducer
 } from "./users-reducer";
 
@@ -29,12 +29,12 @@ export type dialogsPageType = {
 }
 
 export type ActionsTypes = ReturnType<typeof addMessageAC
-    | typeof followAC
-    | typeof unfollowAC
-    | typeof setTotalUsersCountAC
-    | typeof setCurrentPageAC
-    | typeof setIsFetchingAC
-    | typeof setUsersAC>
+    | typeof follow
+    | typeof unfollow
+    | typeof setTotalUsersCount
+    | typeof setCurrentPage
+    | typeof setIsFetching
+    | typeof setUsers>
 
 export type stateType = ReturnType<typeof rootReducer>
 
