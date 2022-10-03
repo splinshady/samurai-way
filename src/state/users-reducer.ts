@@ -1,11 +1,9 @@
-import {v1} from "uuid";
 import {ActionsTypes} from "./redux-store";
 
 export type PhotosType = {
     small: string,
     large: string
 }
-
 export type UserType = {
     id: string,
     photos: PhotosType
@@ -13,12 +11,12 @@ export type UserType = {
     name: string,
     status: string,
 }
-
 export type UsersPageType = {
     users: UserType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 const initialState: UsersPageType = {
@@ -26,6 +24,7 @@ const initialState: UsersPageType = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
+    isFetching: false,
 }
 
 export const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes): UsersPageType => {
@@ -53,6 +52,9 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
         case 'SET-CURRENT-PAGE': {
             return {...state, currentPage: action.newCurrentPage}
         }
+        case 'SET-IS-FETCHING': {
+            return {...state, isFetching: action.isFetching}
+        }
         default:
             return state;
     }
@@ -64,31 +66,33 @@ export const followAC = (userID: string) => {
         userID: userID
     } as const
 }
-
 export const unfollowAC = (userID: string) => {
     return {
         type: 'UNFOLLOW',
         userID: userID
     } as const
 }
-
 export const setUsersAC = (users: UserType[]) => {
     return {
         type: 'SET-USERS',
         users: users
     } as const
 }
-
 export const setTotalUsersCountAC = (newTotalUsersCount: number) => {
     return {
         type: 'SET-TOTAL-USERS-COUNT',
         newTotalUsersCount
     } as const
 }
-
 export const setCurrentPageAC = (newCurrentPage: number) => {
     return {
         type: 'SET-CURRENT-PAGE',
         newCurrentPage
+    } as const
+}
+export const setIsFetchingAC = (isFetching: boolean) => {
+    return {
+        type: 'SET-IS-FETCHING',
+        isFetching
     } as const
 }
