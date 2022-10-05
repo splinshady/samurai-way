@@ -6,13 +6,14 @@ import Profile from "./components/profile/ProfileContainer";
 import {Route} from "react-router-dom";
 import DialogsContainer from "./components/dialogs/DialogsContainer";
 import UsersContainer from "./components/users/UsersContainer";
+import {HeaderContainer} from "./components/header/HeaderContainer";
 
 
 function App() {
     return (
 
         <div className="App">
-            <Header/>
+            <HeaderContainer/>
             <Navbar/>
             <Route path='/dialogs' render={() => <DialogsContainer/>}/>
             <Route path='/profile/:userId?' render={() => <Profile/>}/>

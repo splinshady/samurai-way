@@ -10,6 +10,7 @@ import {
     usersReducer
 } from "./users-reducer";
 import {profileReducer, setUserProfile} from "./profile-reducer";
+import {authReducer, setAuthUserData} from "./auth-reduser";
 
 export type dialogsType = {
     id: string,
@@ -36,6 +37,7 @@ export type ActionsTypes = ReturnType<typeof addMessageAC
     | typeof setCurrentPage
     | typeof setIsFetching
     | typeof setUserProfile
+    | typeof setAuthUserData
     | typeof setUsers>
 
 export type stateType = ReturnType<typeof rootReducer>
@@ -44,6 +46,7 @@ const rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
     usersPage: usersReducer,
     profilePage: profileReducer,
+    auth: authReducer,
 })
 
 export const store = createStore(rootReducer)
