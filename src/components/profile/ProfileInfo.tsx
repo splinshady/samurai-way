@@ -8,9 +8,8 @@ type ProfileInfoPropsType = {
 const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
     return (
         <div>
-            {props.profile.aboutMe}
-            {props.profile.contacts.github}
-            {props.profile.lookingForAJobDescription}
+            <img src={`${props.profile.photos.large}`} alt=""/>
+            {props.profile.fullName}
         </div>
     );
 };

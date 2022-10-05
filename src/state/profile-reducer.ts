@@ -21,7 +21,6 @@ export type ProfileType = {
         large: string | null
     }
 }
-
 type ProfilePageType = {
     profile: ProfileType
 }
