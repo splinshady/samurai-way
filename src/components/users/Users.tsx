@@ -3,6 +3,7 @@ import style from "./User.module.css";
 import defaultPhoto from '../../assets/icons/incubator.png'
 import {UserType} from "../../state/users-reducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 export type UsersPropsType = {
     users: UserType[]
@@ -44,10 +45,26 @@ export function Users(props: UsersPropsType) {
                 </NavLink>
                 {user.followed
                     ? <button onClick={() => {
-                        props.unfollow(user.id)
+                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
+                            withCredentials: true,
+                            headers : {
+                                'API-KEY' : '6a3e89cd-d88e-4f3a-9ebc-280dc7449e40'
+                            }
+                        })
+                            .then(response => {
+                                if (response.data.resultCode === 0) props.unfollow(user.id)
+                            })
                     }}>unfollow</button>
                     : <button onClick={() => {
-                        props.follow(user.id)
+                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
+                            withCredentials: true,
+                            headers : {
+                                'API-KEY' : '6a3e89cd-d88e-4f3a-9ebc-280dc7449e40'
+                            }
+                        })
+                            .then(response => {
+                                if (response.data.resultCode === 0) props.follow(user.id)
+                            })
                     }}>follow</button>
                 }
                 <h3>{user.name}</h3>
