@@ -4,6 +4,7 @@ import defaultPhoto from '../../assets/icons/incubator.png'
 import {UserType} from "../../state/users-reducer";
 import {NavLink} from "react-router-dom";
 import axios from "axios";
+import {usersAPI} from "../../api/api";
 
 export type UsersPropsType = {
     users: UserType[]
@@ -45,25 +46,15 @@ export function Users(props: UsersPropsType) {
                 </NavLink>
                 {user.followed
                     ? <button onClick={() => {
-                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
-                            withCredentials: true,
-                            headers : {
-                                'API-KEY' : '6a3e89cd-d88e-4f3a-9ebc-280dc7449e40'
-                            }
-                        })
+                        usersAPI.unfollowUser(user.id)
                             .then(response => {
-                                if (response.data.resultCode === 0) props.unfollow(user.id)
+                                if (response.resultCode === 0) props.unfollow(user.id)
                             })
                     }}>unfollow</button>
                     : <button onClick={() => {
-                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
-                            withCredentials: true,
-                            headers : {
-                                'API-KEY' : '6a3e89cd-d88e-4f3a-9ebc-280dc7449e40'
-                            }
-                        })
+                        usersAPI.followUser(user.id)
                             .then(response => {
-                                if (response.data.resultCode === 0) props.follow(user.id)
+                                if (response.resultCode === 0) props.follow(user.id)
                             })
                     }}>follow</button>
                 }
