@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from "redux";
+import {combineReducers, legacy_createStore} from "redux";
 import {addMessageAC, dialogsReducer} from "./dialogs-reduser";
 import {
     follow,
@@ -49,5 +49,4 @@ const rootReducer = combineReducers({
     auth: authReducer,
 })
 
-export const store = createStore(rootReducer)
-
+export const store = legacy_createStore(rootReducer)
