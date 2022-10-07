@@ -4,7 +4,7 @@ import {Users} from "./Users";
 import {stateType} from "../../state/redux-store";
 import {
     follow,
-    setCurrentPage, setIsFetching,
+    setCurrentPage, setFollowingInProgress, setIsFetching,
     setTotalUsersCount,
     setUsers,
     unfollow,
@@ -21,6 +21,7 @@ type MapStatePropsType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: string[]
 }
 type MapDispatchPropsType = {
     follow: (userID: string) => void,
@@ -29,6 +30,7 @@ type MapDispatchPropsType = {
     setTotalUsersCount: (newTotalUsersCount: number) => void,
     setCurrentPage: (newCurrentPage: number) => void,
     setIsFetching: (isFetching: boolean) => void,
+    setFollowingInProgress: (userID: string, inFollowing: boolean) => void,
 }
 export type UsersContainerPropsType = MapStatePropsType & MapDispatchPropsType
 
@@ -44,6 +46,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType, any> {
                 })
         }
     }
+
     setCurrentPage = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.setIsFetching(true)
@@ -54,14 +57,17 @@ class UsersContainer extends React.Component<UsersContainerPropsType, any> {
                 this.props.setTotalUsersCount(response.totalCount)
             })
     }
+
     render() {
-        return this.props.isFetching ? <Loader /> : <Users users={this.props.users}
-                   totalUsersCount={this.props.totalUsersCount}
-                   pageSize={this.props.pageSize}
-                   unfollow={this.props.unfollow}
-                   follow={this.props.follow}
-                   setCurrentPage={this.setCurrentPage}
-                   currentPage={this.props.currentPage}/>
+        return this.props.isFetching ? <Loader/> : <Users users={this.props.users}
+                                                          totalUsersCount={this.props.totalUsersCount}
+                                                          pageSize={this.props.pageSize}
+                                                          unfollow={this.props.unfollow}
+                                                          follow={this.props.follow}
+                                                          followingInProgress={this.props.followingInProgress}
+                                                          setFollowingInProgress={this.props.setFollowingInProgress}
+                                                          setCurrentPage={this.setCurrentPage}
+                                                          currentPage={this.props.currentPage}/>
 
     }
 };
@@ -72,8 +78,17 @@ const mapStateToProps = (state: stateType): MapStatePropsType => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress,
     }
 }
 
-export default connect(mapStateToProps, {follow, unfollow, setUsers, setTotalUsersCount, setCurrentPage, setIsFetching})(UsersContainer);
+export default connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setUsers,
+    setTotalUsersCount,
+    setCurrentPage,
+    setIsFetching,
+    setFollowingInProgress,
+})(UsersContainer);

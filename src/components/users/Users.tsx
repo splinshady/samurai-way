@@ -13,7 +13,9 @@ export type UsersPropsType = {
     unfollow: (userID: string) => void
     follow: (userID: string) => void
     setCurrentPage: (pageNumber: number) => void
+    setFollowingInProgress: (userID: string, inFollowing: boolean) => void
     currentPage: number
+    followingInProgress: string[]
 }
 
 export function Users(props: UsersPropsType) {
@@ -45,16 +47,20 @@ export function Users(props: UsersPropsType) {
                          className={style.user_avatar}/>
                 </NavLink>
                 {user.followed
-                    ? <button onClick={() => {
+                    ? <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
+                        props.setFollowingInProgress(user.id, true)
                         usersAPI.unfollowUser(user.id)
                             .then(response => {
                                 if (response.resultCode === 0) props.unfollow(user.id)
+                                props.setFollowingInProgress(user.id, false)
                             })
                     }}>unfollow</button>
-                    : <button onClick={() => {
+                    : <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
+                        props.setFollowingInProgress(user.id, true)
                         usersAPI.followUser(user.id)
                             .then(response => {
                                 if (response.resultCode === 0) props.follow(user.id)
+                                props.setFollowingInProgress(user.id, false)
                             })
                     }}>follow</button>
                 }

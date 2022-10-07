@@ -2,7 +2,7 @@ import {combineReducers, legacy_createStore} from "redux";
 import {addMessageAC, dialogsReducer} from "./dialogs-reduser";
 import {
     follow,
-    setCurrentPage,
+    setCurrentPage, setFollowingInProgress,
     setIsFetching,
     setTotalUsersCount,
     setUsers,
@@ -38,6 +38,7 @@ export type ActionsTypes = ReturnType<typeof addMessageAC
     | typeof setIsFetching
     | typeof setUserProfile
     | typeof setAuthUserData
+    | typeof setFollowingInProgress
     | typeof setUsers>
 
 export type stateType = ReturnType<typeof rootReducer>
