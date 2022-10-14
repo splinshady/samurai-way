@@ -1,5 +1,6 @@
-import {combineReducers, legacy_createStore} from "redux";
+import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
 import {addMessageAC, dialogsReducer} from "./dialogs-reduser";
+import thunkMiddleware from "redux-thunk";
 import {
     follow,
     setCurrentPage, setFollowingInProgress,
@@ -50,4 +51,4 @@ const rootReducer = combineReducers({
     auth: authReducer,
 })
 
-export const store = legacy_createStore(rootReducer)
+export const store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddleware))

@@ -1,4 +1,6 @@
 import {ActionsTypes} from "./redux-store";
+import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 export type PhotosType = {
     small: string,
@@ -61,14 +63,16 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
             return {
                 ...state,
                 followingInProgress: action.inFollowing
-                ? [...state.followingInProgress, action.userID]
-                : state.followingInProgress.filter(id => action.userID !== id)
+                    ? [...state.followingInProgress, action.userID]
+                    : state.followingInProgress.filter(id => action.userID !== id)
             }
         }
         default:
             return state;
     }
 }
+
+// Actions
 
 export const follow = (userID: string) => {
     return {
@@ -112,4 +116,46 @@ export const setFollowingInProgress = (userID: string, inFollowing: boolean) => 
         userID,
         inFollowing
     } as const
+}
+
+// Thunks
+
+export const followUserTC = (userID: string) => (dispatch: Dispatch) => {
+    dispatch(setFollowingInProgress(userID, true))
+    usersAPI.followUser(userID)
+        .then(response => {
+            if (response.resultCode === 0) dispatch(follow(userID))
+            dispatch(setFollowingInProgress(userID, false))
+        })
+}
+export const unfollowUserTC = (userID: string) => (dispatch: Dispatch) => {
+    dispatch(setFollowingInProgress(userID, true))
+    usersAPI.followUser(userID)
+        .then(response => {
+            if (response.resultCode === 0) dispatch(unfollow(userID))
+            dispatch(setFollowingInProgress(userID, false))
+        })
+}
+export const getUsersTC = (users: UserType[], currentPage: number, pageSize: number) => (dispatch: Dispatch) => {
+    if (users.length === 0) {
+        dispatch(setIsFetching(true))
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(response => {
+                if (!response.error) {
+                    dispatch(setIsFetching(false))
+                    dispatch(setUsers(response.items))
+                    dispatch(setTotalUsersCount(response.totalCount))
+                }
+            })
+    }
+}
+export const setCurrentPageTC = (pageNumber: number, pageSize: number) => (dispatch: Dispatch) => {
+    dispatch(setCurrentPage(pageNumber))
+    dispatch(setIsFetching(true))
+    usersAPI.getPage(pageNumber, pageSize)
+        .then(response => {
+            dispatch(setIsFetching(false))
+            dispatch(setUsers(response.items))
+            dispatch(setTotalUsersCount(response.totalCount))
+        })
 }

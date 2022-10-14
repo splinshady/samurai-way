@@ -1,21 +1,19 @@
 import React from 'react';
 import style from "./User.module.css";
 import defaultPhoto from '../../assets/icons/incubator.png'
-import {UserType} from "../../state/users-reducer";
+import {setCurrentPageTC, UserType} from "../../state/users-reducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {usersAPI} from "../../api/api";
 
 export type UsersPropsType = {
     users: UserType[]
     totalUsersCount: number
     pageSize: number
-    unfollow: (userID: string) => void
-    follow: (userID: string) => void
     setCurrentPage: (pageNumber: number) => void
     setFollowingInProgress: (userID: string, inFollowing: boolean) => void
     currentPage: number
     followingInProgress: string[]
+    followUserTC: (useID: string) => void
+    unfollowUserTC: (useID: string) => void
 }
 
 export function Users(props: UsersPropsType) {
@@ -33,9 +31,7 @@ export function Users(props: UsersPropsType) {
             {pages.map(page => {
                 return <span key={page}
                              className={props.currentPage === page ? style.currentPage : ''}
-                             onClick={() => {
-                                 props.setCurrentPage(page)
-                             }}
+                             onClick={() => {props.setCurrentPage(page)}}
                 >{` ${page} `}</span>
             })}
         </div>
@@ -47,22 +43,8 @@ export function Users(props: UsersPropsType) {
                          className={style.user_avatar}/>
                 </NavLink>
                 {user.followed
-                    ? <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
-                        props.setFollowingInProgress(user.id, true)
-                        usersAPI.unfollowUser(user.id)
-                            .then(response => {
-                                if (response.resultCode === 0) props.unfollow(user.id)
-                                props.setFollowingInProgress(user.id, false)
-                            })
-                    }}>unfollow</button>
-                    : <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
-                        props.setFollowingInProgress(user.id, true)
-                        usersAPI.followUser(user.id)
-                            .then(response => {
-                                if (response.resultCode === 0) props.follow(user.id)
-                                props.setFollowingInProgress(user.id, false)
-                            })
-                    }}>follow</button>
+                    ? <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {props.unfollowUserTC(user.id)}}>unfollow</button>
+                    : <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {props.followUserTC(user.id)}}>follow</button>
                 }
                 <h3>{user.name}</h3>
                 <span>{user.status}</span>
