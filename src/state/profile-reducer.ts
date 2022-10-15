@@ -1,4 +1,7 @@
 import {ActionsTypes} from "./redux-store";
+import {profileAPI, usersAPI} from "../api/api";
+import {Dispatch} from "redux";
+import {follow, setFollowingInProgress} from "./users-reducer";
 
 export type ProfileType = {
     aboutMe: string | null,
@@ -57,9 +60,19 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
     }
 }
 
+//Actions
+
 export const setUserProfile = (profile: ProfileType) => {
     return {
         type: 'SET-USER-PROFILE',
         profile
     } as const
+}
+
+//Thunks
+
+export const setUserProfileTC = (userID: string) => (dispatch: Dispatch) => {
+    profileAPI.getUserProfile(userID).then(response => {
+        dispatch(setUserProfile(response))
+    })
 }

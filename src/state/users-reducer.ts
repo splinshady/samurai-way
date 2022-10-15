@@ -130,7 +130,7 @@ export const followUserTC = (userID: string) => (dispatch: Dispatch) => {
 }
 export const unfollowUserTC = (userID: string) => (dispatch: Dispatch) => {
     dispatch(setFollowingInProgress(userID, true))
-    usersAPI.followUser(userID)
+    usersAPI.unfollowUser(userID)
         .then(response => {
             if (response.resultCode === 0) dispatch(unfollow(userID))
             dispatch(setFollowingInProgress(userID, false))

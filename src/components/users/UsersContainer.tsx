@@ -10,7 +10,6 @@ import {
     UserType
 } from "../../state/users-reducer";
 import {Loader} from "../common/loader";
-import {usersAPI} from "../../api/api";
 
 type MapStatePropsType = {
     users: UserType[]
