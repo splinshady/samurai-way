@@ -10,6 +10,9 @@ import {
     UserType
 } from "../../state/users-reducer";
 import {Loader} from "../common/loader";
+import {compose} from "redux";
+import {setUserProfileTC} from "../../state/profile-reducer";
+import {withRouter} from "react-router-dom";
 
 type MapStatePropsType = {
     users: UserType[]
@@ -66,14 +69,17 @@ const mapStateToProps = (state: stateType): MapStatePropsType => {
     }
 }
 
-export default connect(mapStateToProps, {
-    setUsers,
-    setTotalUsersCount,
-    setCurrentPage,
-    setIsFetching,
-    setFollowingInProgress,
-    followUserTC,
-    unfollowUserTC,
-    getUsersTC,
-    setCurrentPageTC,
-})(UsersContainer);
+
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+        setUsers,
+        setTotalUsersCount,
+        setCurrentPage,
+        setIsFetching,
+        setFollowingInProgress,
+        followUserTC,
+        unfollowUserTC,
+        getUsersTC,
+        setCurrentPageTC,
+    })
+)(UsersContainer)

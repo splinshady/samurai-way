@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import {stateType} from "../../state/redux-store";
 import Header from "./Header";
 import {authMeTC} from "../../state/auth-reduser";
+import {compose} from "redux";
+import Dialogs from "../dialogs/Dialogs";
 
 type MapStatePropsType = {
     userID: string | null
@@ -36,4 +38,6 @@ const MapStateProps = (state: stateType): MapStatePropsType=> {
     }
 }
 
-export default connect(MapStateProps, {authMeTC})(HeaderContainer)
+export default compose<React.ComponentType>(
+    connect(MapStateProps, {authMeTC})
+)(HeaderContainer)
