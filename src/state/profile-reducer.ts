@@ -25,7 +25,8 @@ export type ProfileType = {
     }
 }
 type ProfilePageType = {
-    profile: ProfileType
+    profile: ProfileType,
+    userStatus: string
 }
 
 const initialState: ProfilePageType = {
@@ -49,7 +50,8 @@ const initialState: ProfilePageType = {
             small: 'string | null',
             large: 'string | null'
         }
-    }
+    },
+    userStatus: 'status a'
 }
 
 export const profileReducer = (state = initialState, action: ActionsTypes): ProfilePageType => {

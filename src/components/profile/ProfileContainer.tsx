@@ -13,6 +13,7 @@ type PathParamsType = {
 
 type MapStateToPropsType = {
     profile: ProfileType
+    userStatus: string
 }
 type MapDispatchPropsType = {
     setUserProfileTC: (userID: string) => void
@@ -34,7 +35,8 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType, any> {
 
 const mapStateToProps = (state: stateType): MapStateToPropsType => {
     return {
-        profile: state.profilePage.profile
+        profile: state.profilePage.profile,
+        userStatus: state.profilePage.userStatus
     }
 }
 
