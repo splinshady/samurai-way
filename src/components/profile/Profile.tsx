@@ -8,7 +8,7 @@ import {ProfileContainerPropsType} from "./ProfileContainer";
 const Profile: React.FC<ProfileContainerPropsType> = (props) => {
     return (
         <div className={style.profile + ' shadow_section'}>
-            <ProfileInfo userStatus={props.userStatus} profile={props.profile}/>
+            <ProfileInfo userStatus={props.userStatus} updateStatus={props.updateUserStatusTC} profile={props.profile}/>
             <MyPosts />
         </div>
     );

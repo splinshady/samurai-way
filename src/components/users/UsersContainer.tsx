@@ -11,8 +11,6 @@ import {
 } from "../../state/users-reducer";
 import {Loader} from "../common/loader";
 import {compose} from "redux";
-import {setUserProfileTC} from "../../state/profile-reducer";
-import {withRouter} from "react-router-dom";
 
 type MapStatePropsType = {
     users: UserType[]

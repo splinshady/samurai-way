@@ -10,7 +10,7 @@ import {
     unfollow,
     usersReducer
 } from "./users-reducer";
-import {profileReducer, setUserProfile} from "./profile-reducer";
+import {profileReducer, setUserProfile, setUserStatus} from "./profile-reducer";
 import {authReducer, setAuthUserData} from "./auth-reduser";
 
 export type dialogsType = {
@@ -40,7 +40,8 @@ export type ActionsTypes = ReturnType<typeof addMessageAC
     | typeof setUserProfile
     | typeof setAuthUserData
     | typeof setFollowingInProgress
-    | typeof setUsers>
+    | typeof setUsers
+    | typeof setUserStatus>
 
 export type stateType = ReturnType<typeof rootReducer>
 
@@ -52,3 +53,6 @@ const rootReducer = combineReducers({
 })
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddleware))
+
+// @ts-ignore
+window.store = store
