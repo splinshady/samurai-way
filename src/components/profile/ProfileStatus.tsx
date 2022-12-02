@@ -29,6 +29,14 @@ export default class ProfileStatus extends React.Component<ProfileStatusPropsTyp
     this.props.updateStatus(this.state.status)
   }
 
+componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<{}>) {
+    if (prevProps.userStatus !== this.props.userStatus) {
+      this.setState({
+        status: this.props.userStatus
+      })
+    }
+}
+
   render() {
     return <div>
       {
