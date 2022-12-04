@@ -12,6 +12,7 @@ import {
 } from "./users-reducer";
 import {profileReducer, setUserProfile, setUserStatus} from "./profile-reducer";
 import {authReducer, setAuthUserData} from "./auth-reduser";
+import {reducer as formReducer} from "redux-form";
 
 export type dialogsType = {
     id: string,
@@ -50,6 +51,7 @@ const rootReducer = combineReducers({
     usersPage: usersReducer,
     profilePage: profileReducer,
     auth: authReducer,
+    form: formReducer,
 })
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddleware))
