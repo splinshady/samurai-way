@@ -3,6 +3,7 @@ import styles from './MessagesWindow.module.css'
 import Message from "./message/Message";
 import style from "../dialogs-people/person-dialog/PersonDialog.module.css";
 import {messageType} from "../../../state/redux-store";
+import {AddMessageFormType, AddMessageReduxForm} from "./AddMessageForm";
 
 type MessagesWindowPropsType = {
     messages: Array<messageType>
@@ -10,16 +11,8 @@ type MessagesWindowPropsType = {
 }
 
 const MessagesWindow = (props: MessagesWindowPropsType) => {
-
-    const [messInputValue, setMessInputValue] = useState<string>('')
-
-    const sendMessageClickHandler = () => {
-        props.sendMessage(messInputValue)
-        setMessInputValue('')
-    }
-
-    const changeMessageHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        setMessInputValue(event.currentTarget.value)
+    const sendMessageClickHandler = (formData: AddMessageFormType) => {
+        props.sendMessage(formData.message)
     }
 
     return (
@@ -39,11 +32,7 @@ const MessagesWindow = (props: MessagesWindowPropsType) => {
                     />
                 })}
             </section>
-
-            <section className={styles.input_container}>
-                <textarea value={messInputValue} onChange={changeMessageHandler} className={styles.input_textarea}></textarea>
-                <button onClick={sendMessageClickHandler}>send</button>
-            </section>
+          <AddMessageReduxForm onSubmit={sendMessageClickHandler}/>
         </div>
     );
 };

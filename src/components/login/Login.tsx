@@ -1,10 +1,9 @@
 import React from 'react';
 import style from './Login.module.css';
-import {ReduxLoginForm} from "./LoginForm";
+import {LoginFormType, ReduxLoginForm} from "./LoginForm";
 
 const Login = () => {
-  const onSubmit = (formData: any) => {
-    console.log(formData)
+  const onSubmit = (formData: LoginFormType) => {
   }
 
   return (

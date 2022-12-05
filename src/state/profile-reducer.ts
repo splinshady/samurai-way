@@ -1,5 +1,5 @@
 import {ActionsTypes} from "./redux-store";
-import {profileAPI, usersAPI} from "../api/api";
+import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
 
 export type ProfileType = {
