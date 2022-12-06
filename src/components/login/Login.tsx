@@ -1,9 +1,22 @@
 import React from 'react';
 import style from './Login.module.css';
 import {LoginFormType, ReduxLoginForm} from "./LoginForm";
+import {loginTC} from "../../state/auth-reduser";
+import {Redirect} from "react-router-dom";
 
-const Login = () => {
+type LoginPropsType = {
+  onSubmit: (formData: LoginFormType) => void
+  isAuth: boolean
+}
+
+const Login: React.FC<LoginPropsType> = (props) => {
   const onSubmit = (formData: LoginFormType) => {
+    props.onSubmit(formData)
+  }
+
+  if (props.isAuth) {
+    console.log(props.isAuth)
+    return <Redirect to={'/profile'}/>
   }
 
   return (

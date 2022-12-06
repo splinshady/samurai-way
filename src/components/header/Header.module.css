@@ -10,3 +10,12 @@
 .logo {
     height: 40px;
 }
+
+.logout_container {
+    margin-right: 30px;
+}
+
+.logout {
+    cursor: pointer;
+    margin-left: 10px;
+}

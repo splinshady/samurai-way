@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
 import {addMessageAC, dialogsReducer} from "./dialogs-reduser";
-import thunkMiddleware from "redux-thunk";
+import thunkMiddleware, {ThunkDispatch} from "redux-thunk";
 import {
     follow,
     setCurrentPage, setFollowingInProgress,
@@ -44,7 +44,7 @@ export type ActionsTypes = ReturnType<typeof addMessageAC
     | typeof setUsers
     | typeof setUserStatus>
 
-export type stateType = ReturnType<typeof rootReducer>
+export type StateType = ReturnType<typeof rootReducer>
 
 const rootReducer = combineReducers({
     dialogsPage: dialogsReducer,
@@ -55,6 +55,9 @@ const rootReducer = combineReducers({
 })
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddleware))
+
+export type AppDispatchType = ThunkDispatch<StateType, unknown, ActionsTypes>
+
 
 // @ts-ignore
 window.store = store

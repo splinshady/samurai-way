@@ -1,43 +1,43 @@
 import React from "react";
 import {connect} from "react-redux";
-import {stateType} from "../../state/redux-store";
 import Header from "./Header";
-import {authMeTC} from "../../state/auth-reduser";
+import {authMeTC, logoutTC} from "../../state/auth-reduser";
 import {compose} from "redux";
-import Dialogs from "../dialogs/Dialogs";
+import {StateType} from "../../state/redux-store";
 
 type MapStatePropsType = {
-    userID: string | null
-    email: string | null
-    login: string | null
-    isAuth: boolean
+  userID: string | null
+  email: string | null
+  login: string | null
+  isAuth: boolean
 }
 
 type MapDispatchPropsType = {
-    authMeTC: () => void
+  authMeTC: () => void
+  logoutTC: () => void
 }
 
 export type HeaderContainerPropsType = MapStatePropsType & MapDispatchPropsType
 
 class HeaderContainer extends React.Component<HeaderContainerPropsType, any> {
-    componentDidMount() {
-        this.props.authMeTC()
-    }
+  componentDidMount() {
+    this.props.authMeTC()
+  }
 
-    render() {
-        return <Header isAuth={this.props.isAuth} login={this.props.login}/>;
-    }
+  render() {
+    return <Header isAuth={this.props.isAuth} login={this.props.login} logout={this.props.logoutTC}/>;
+  }
 }
 
-const MapStateProps = (state: stateType): MapStatePropsType=> {
-    return {
-        userID: state.auth.userID,
-        email: state.auth.email,
-        login: state.auth.login,
-        isAuth: state.auth.isAuth,
-    }
+const MapStateProps = (state: StateType): MapStatePropsType => {
+  return {
+    userID: state.auth.userID,
+    email: state.auth.email,
+    login: state.auth.login,
+    isAuth: state.auth.isAuth,
+  }
 }
 
 export default compose<React.ComponentType>(
-    connect(MapStateProps, {authMeTC})
+  connect(MapStateProps, {authMeTC, logoutTC})
 )(HeaderContainer)

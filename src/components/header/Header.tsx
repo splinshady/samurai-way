@@ -3,21 +3,30 @@ import style from './Header.module.css';
 import logo from '../../assets/icons/incubator.png';
 
 type HeaderPropsType = {
-    isAuth: boolean,
-    login: string | null
+  isAuth: boolean
+  login: string | null
+  logout: () => void
 }
 
-const Header: React.FC<HeaderPropsType> = ({isAuth, login}) => {
-    return (
-        <header className={style.header + ' shadow_section'}>
-            <img className={style.logo} src={logo} alt="logo"/>
+const Header: React.FC<HeaderPropsType> = ({isAuth, login, logout}) => {
+
+  return (
+    <header className={style.header + ' shadow_section'}>
+      <img className={style.logo} src={logo} alt="logo"/>
+      <div className={style.logout_container}>
+        {
+          isAuth
+            ?
             <div>
-                {
-                    isAuth ? <span>{login}</span> : <span>Log in</span>
-                }
+              <span className={style.user_login}>{login}</span>
+              <span className={style.logout} onClick={logout}>Log out</span>
             </div>
-        </header>
-    );
+            :
+            <span>Log in</span>
+        }
+      </div>
+    </header>
+  );
 };
 
 export default Header;

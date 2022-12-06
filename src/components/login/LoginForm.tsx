@@ -4,19 +4,19 @@ import {maxLengthCreator, requiredField} from "../../utils/validators";
 import {Input} from "../common/formControl/Input";
 
 export type LoginFormType = {
-  login: string
+  email: string
   password: string
   rememberMe: boolean
 }
 
-const maxLength = maxLengthCreator(15)
+const maxLength = maxLengthCreator(50)
 
 
 export const LoginForm = (props: InjectedFormProps<LoginFormType>) => {
   return (
     <form onSubmit={props.handleSubmit}>
-      <Field placeholder={'login'}
-             name={'login'}
+      <Field placeholder={'email'}
+             name={'email'}
              component={Input}
              validate={[requiredField, maxLength]}
       />
