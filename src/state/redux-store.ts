@@ -12,7 +12,7 @@ import {
 } from "./users-reducer";
 import {profileReducer, setUserProfile, setUserStatus} from "./profile-reducer";
 import {authReducer, setAuthUserData} from "./auth-reduser";
-import {reducer as formReducer} from "redux-form";
+import {reducer as formReducer, stopSubmit} from "redux-form";
 
 export type dialogsType = {
     id: string,
@@ -31,6 +31,9 @@ export type dialogsPageType = {
     dialogs: Array<dialogsType>,
     messages: Array<messageType>,
 }
+
+
+
 
 export type ActionsTypes = ReturnType<typeof addMessageAC
     | typeof follow

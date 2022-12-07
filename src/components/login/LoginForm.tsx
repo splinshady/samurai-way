@@ -2,6 +2,7 @@ import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, requiredField} from "../../utils/validators";
 import {Input} from "../common/formControl/Input";
+import style from "./Login.module.css";
 
 export type LoginFormType = {
   email: string
@@ -27,6 +28,7 @@ export const LoginForm = (props: InjectedFormProps<LoginFormType>) => {
       />
       <Field component={Input} name={'rememberMe'} type={'checkbox'}/>
       <span>remember me</span>
+      {props.error &&  <span className={style.common_form_error}>Error</span>}
       <button type='submit'>Login</button>
     </form>
   );

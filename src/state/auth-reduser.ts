@@ -3,6 +3,7 @@ import axios from "axios";
 import {Dispatch} from "redux";
 import {authAPI, LoginDataType, profileAPI} from "../api/api";
 import {setUserProfile} from "./profile-reducer";
+import {stopSubmit} from "redux-form";
 
 export type authType = {
   userID: string | null
@@ -52,11 +53,14 @@ export const authMeTC = () => (dispatch: Dispatch) => {
     })
 }
 
-export const loginTC = (data: LoginDataType) => (dispatch: AppDispatchType) => {
+export const loginTC = (data: LoginDataType) => (dispatch: AppDispatchType | any) => {
   authAPI.login(data)
     .then(response => {
       if (response.resultCode === 0) {
         dispatch(authMeTC())
+      } else {
+        const message = response.messages.length ? response.messages[0] : 'Something went wrong'
+        dispatch(stopSubmit('login', {_error: message}))
       }
     })
 }
