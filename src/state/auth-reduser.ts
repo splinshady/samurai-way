@@ -1,8 +1,6 @@
 import {ActionsTypes, AppDispatchType} from "./redux-store";
-import axios from "axios";
 import {Dispatch} from "redux";
 import {authAPI, LoginDataType, profileAPI} from "../api/api";
-import {setUserProfile} from "./profile-reducer";
 import {stopSubmit} from "redux-form";
 
 export type authType = {
@@ -10,6 +8,7 @@ export type authType = {
   email: string | null
   login: string | null
   isAuth: boolean
+  isInitialized: boolean
 }
 
 const initialState: authType = {
@@ -17,6 +16,7 @@ const initialState: authType = {
   login: null,
   email: null,
   isAuth: false,
+  isInitialized: false,
 }
 
 export const authReducer = (state = initialState, action: ActionsTypes): authType => {
@@ -25,6 +25,12 @@ export const authReducer = (state = initialState, action: ActionsTypes): authTyp
       return {
         ...state,
         ...action.data,
+      }
+    }
+    case 'SET-IS-INITIALIZED' : {
+      return {
+        ...state,
+        isInitialized: action.isInitialized,
       }
     }
     default:
@@ -41,15 +47,30 @@ export const setAuthUserData = (userID: string | null, login: string | null, ema
   } as const
 }
 
+export const setIsInitialized = (isInitialized: boolean) => {
+  return {
+    type: 'SET-IS-INITIALIZED',
+    isInitialized
+  } as const
+}
+
 //Thunks
 
 export const authMeTC = () => (dispatch: Dispatch) => {
-  authAPI.authMe()
+  return authAPI.authMe()
     .then(response => {
       const data = response.data
       if (response.resultCode === 0) {
         dispatch(setAuthUserData(data.id, data.login, data.email, true))
       }
+    })
+}
+
+export const initializeAppTC = () => (dispatch: AppDispatchType) => {
+  let authPromise = dispatch(authMeTC())
+  Promise.all([authPromise])
+    .then(() => {
+      dispatch(setIsInitialized(true))
     })
 }
 

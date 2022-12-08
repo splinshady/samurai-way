@@ -15,7 +15,6 @@ const Login: React.FC<LoginPropsType> = (props) => {
   }
 
   if (props.isAuth) {
-    console.log(props.isAuth)
     return <Redirect to={'/profile'}/>
   }
 

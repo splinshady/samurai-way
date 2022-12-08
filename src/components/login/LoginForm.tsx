@@ -23,6 +23,7 @@ export const LoginForm = (props: InjectedFormProps<LoginFormType>) => {
       />
       <Field placeholder={'password'}
              name={'password'}
+             type={'password'}
              component={Input}
              validate={[requiredField, maxLength]}
       />

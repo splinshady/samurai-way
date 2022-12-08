@@ -30,6 +30,9 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType, any> {
     if (!userId) {
       userId = this.props.authorizedUserID
     }
+    if (!userId) {
+      this.props.history.push('/login')
+    }
     this.props.setUserProfileTC(userId)
     this.props.setUserStatusTC(userId)
   }

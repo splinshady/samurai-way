@@ -11,7 +11,7 @@ import {
     usersReducer
 } from "./users-reducer";
 import {profileReducer, setUserProfile, setUserStatus} from "./profile-reducer";
-import {authReducer, setAuthUserData} from "./auth-reduser";
+import {authReducer, setAuthUserData, setIsInitialized} from "./auth-reduser";
 import {reducer as formReducer, stopSubmit} from "redux-form";
 
 export type dialogsType = {
@@ -45,6 +45,7 @@ export type ActionsTypes = ReturnType<typeof addMessageAC
     | typeof setAuthUserData
     | typeof setFollowingInProgress
     | typeof setUsers
+    | typeof setIsInitialized
     | typeof setUserStatus>
 
 export type StateType = ReturnType<typeof rootReducer>

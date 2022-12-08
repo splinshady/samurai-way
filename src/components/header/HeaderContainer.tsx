@@ -13,16 +13,12 @@ type MapStatePropsType = {
 }
 
 type MapDispatchPropsType = {
-  authMeTC: () => void
   logoutTC: () => void
 }
 
 export type HeaderContainerPropsType = MapStatePropsType & MapDispatchPropsType
 
 class HeaderContainer extends React.Component<HeaderContainerPropsType, any> {
-  componentDidMount() {
-    this.props.authMeTC()
-  }
 
   render() {
     return <Header isAuth={this.props.isAuth} login={this.props.login} logout={this.props.logoutTC}/>;
@@ -39,5 +35,5 @@ const MapStateProps = (state: StateType): MapStatePropsType => {
 }
 
 export default compose<React.ComponentType>(
-  connect(MapStateProps, {authMeTC, logoutTC})
+  connect(MapStateProps, {logoutTC})
 )(HeaderContainer)
