@@ -24,7 +24,7 @@ type MapDispatchPropsType = {
 }
 export type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & MapStateToPropsType & MapDispatchPropsType
 
-class ProfileContainer extends React.Component<ProfileContainerPropsType, any> {
+class ProfileContainer extends React.Component<ProfileContainerPropsType, {}> {
   componentDidMount() {
     let userId: string | null = this.props.match.params.userId
     if (!userId) {

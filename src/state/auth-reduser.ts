@@ -1,7 +1,8 @@
-import {ActionsTypes, AppDispatchType} from "./redux-store";
+import {ActionsTypes, AppDispatchType, StateType} from "./redux-store";
 import {Dispatch} from "redux";
 import {authAPI, LoginDataType, profileAPI} from "../api/api";
-import {stopSubmit} from "redux-form";
+import {FormAction, stopSubmit} from "redux-form";
+import {ThunkDispatch} from "redux-thunk";
 
 export type authType = {
   userID: string | null
@@ -74,7 +75,7 @@ export const initializeAppTC = () => (dispatch: AppDispatchType) => {
     })
 }
 
-export const loginTC = (data: LoginDataType) => (dispatch: AppDispatchType | any) => {
+export const loginTC = (data: LoginDataType) => (dispatch: AppDispatchType) => {
   authAPI.login(data)
     .then(response => {
       if (response.resultCode === 0) {
