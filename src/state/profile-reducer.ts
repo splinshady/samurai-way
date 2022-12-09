@@ -23,7 +23,8 @@ export type ProfileType = {
     large: string | null
   }
 }
-type ProfilePageType = {
+
+export type ProfilePageType = {
   profile: ProfileType,
   userStatus: string
 }
