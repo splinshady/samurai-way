@@ -7,7 +7,6 @@ const MyPosts = memo(() => {
   const onSubmit = (formData: AddPostFormType) => {
     console.log(formData)
   }
-  console.log('dsd')
   return (
     <section className={style.myPosts}>
       <h3>My posts</h3>
