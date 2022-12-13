@@ -5,13 +5,12 @@ import ProfileContainer from "./components/profile/ProfileContainer";
 import {Route, withRouter} from "react-router-dom";
 import DialogsContainer from "./components/dialogs/DialogsContainer";
 import UsersContainer from "./components/users/UsersContainer";
-import HeaderContainer, {HeaderContainerPropsType} from "./components/header/HeaderContainer";
+import HeaderContainer from "./components/header/HeaderContainer";
 import LoginContainer from "./components/login/LoginContainer";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {initializeAppTC} from "./state/auth-reduser";
 import {StateType} from "./state/redux-store";
-import {Loader} from "./components/common/loader";
 
 
 class App extends React.Component<AppPropsType, any> {
