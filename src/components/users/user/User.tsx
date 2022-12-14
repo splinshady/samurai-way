@@ -1,6 +1,6 @@
 import React from 'react';
 import {NavLink} from "react-router-dom";
-import defaultPhoto from "../../../assets/icons/incubator.png";
+import defaultPhoto from "../../../assets/icons/user.png";
 import style from "../User.module.css";
 import {UserType} from "../../../state/users-reducer";
 

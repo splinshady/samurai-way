@@ -21,8 +21,8 @@ beforeEach(() => {
       fullName: '',
       userId: 0,
       photos: {
-        small: null,
-        large: null
+        small: undefined,
+        large: undefined
       }
     },
     userStatus: ''
@@ -47,8 +47,8 @@ test('correct error message should be set', () => {
     fullName: '',
     userId: 0,
     photos: {
-      small: null,
-      large: null
+      small: undefined,
+      large: undefined
     }
   }
 

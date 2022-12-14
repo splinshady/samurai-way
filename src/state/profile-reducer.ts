@@ -18,10 +18,12 @@ export type ProfileType = {
   lookingForAJobDescription: string | null,
   fullName: string,
   userId: number,
-  photos: {
-    small: string | null,
-    large: string | null
-  }
+  photos: ProfilePhotosType
+}
+
+export type ProfilePhotosType = {
+  small: string | undefined,
+  large: string | undefined
 }
 
 export type ProfilePageType = {
@@ -60,6 +62,11 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
       return {...state, profile: action.profile}
     case 'SET-USER-STATUS':
       return {...state, userStatus: action.status}
+    case 'SET-USER-PHOTO':
+      return {
+        ...state,
+        profile: {...state.profile, photos: action.photos}
+      }
     default:
       return state;
   }
@@ -81,7 +88,22 @@ export const setUserStatus = (status: string) => {
   } as const
 }
 
+export const setPhotos = (photos: any) => {
+  return {
+    type: 'SET-USER-PHOTO',
+    photos
+  } as const
+}
+
 //Thunks
+
+export const savePhotoTC = (file: File) => (dispatch: Dispatch) => {
+  profileAPI.savePhoto(file)
+    .then(response => {
+      console.log(response)
+      dispatch(setPhotos(response.data.photos))
+    })
+}
 
 export const setUserProfileTC = (userID: string) => (dispatch: Dispatch) => {
   profileAPI.getUserProfile(userID).then(response => {

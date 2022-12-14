@@ -2,7 +2,13 @@ import React from 'react';
 import {connect} from "react-redux";
 import Profile from "./Profile";
 import {StateType} from "../../state/redux-store";
-import {ProfileType, setUserProfileTC, setUserStatusTC, updateUserStatusTC} from "../../state/profile-reducer";
+import {
+  ProfileType,
+  savePhotoTC,
+  setUserProfileTC,
+  setUserStatusTC,
+  updateUserStatusTC
+} from "../../state/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
 import WithAuthRedirect from "../../hoc/withAuthRedirect";
@@ -21,11 +27,12 @@ type MapDispatchPropsType = {
   setUserProfileTC: (userID: string | null) => void
   setUserStatusTC: (userID: string | null) => void
   updateUserStatusTC: (status: string) => void
+  savePhotoTC: (file: File) => void
 }
 export type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & MapStateToPropsType & MapDispatchPropsType
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType, {}> {
-  componentDidMount() {
+  updateProfile() {
     let userId: string | null = this.props.match.params.userId
     if (!userId) {
       userId = this.props.authorizedUserID
@@ -37,8 +44,18 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType, {}> {
     this.props.setUserStatusTC(userId)
   }
 
+  componentDidMount() {
+    this.updateProfile()
+  }
+
+  componentDidUpdate(prevProps: Readonly<ProfileContainerPropsType>, prevState: Readonly<{}>, snapshot?: any) {
+    if (this.props.match.params.userId !== prevProps.match.params.userId) {
+      this.updateProfile()
+    }
+  }
+
   render() {
-    return <Profile {...this.props}/>
+    return <Profile {...this.props} isOwner={!this.props.match.params.userId}/>
   }
 };
 
@@ -52,7 +69,7 @@ const mapStateToProps = (state: StateType): MapStateToPropsType => {
 }
 
 export default compose<React.ComponentType>(
-  connect(mapStateToProps, {setUserProfileTC, setUserStatusTC, updateUserStatusTC}),
+  connect(mapStateToProps, {setUserProfileTC, savePhotoTC, setUserStatusTC, updateUserStatusTC}),
   withRouter,
   WithAuthRedirect
 )(ProfileContainer)

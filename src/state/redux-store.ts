@@ -10,7 +10,7 @@ import {
     unfollow,
     usersReducer
 } from "./users-reducer";
-import {profileReducer, setUserProfile, setUserStatus} from "./profile-reducer";
+import {profileReducer, setPhotos, setUserProfile, setUserStatus} from "./profile-reducer";
 import {authReducer, setAuthUserData, setIsInitialized} from "./auth-reduser";
 import {FormAction, reducer as formReducer, stopSubmit} from "redux-form";
 
@@ -46,6 +46,7 @@ export type ActionsTypes = ReturnType<typeof addMessageAC
     | typeof setFollowingInProgress
     | typeof setUsers
     | typeof setIsInitialized
+    | typeof setPhotos
     | typeof setUserStatus>
 
 export type StateType = ReturnType<typeof rootReducer>
