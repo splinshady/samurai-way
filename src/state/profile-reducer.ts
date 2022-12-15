@@ -1,19 +1,11 @@
-import {ActionsTypes} from "./redux-store";
+import {ActionsTypes, AppDispatchType, StateType} from "./redux-store";
 import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {ProfileDataEditFormType} from "../components/profile/profileUserAboutData/ProfileUserAboutDataEdit";
 
 export type ProfileType = {
   aboutMe: string | null,
-  contacts: {
-    facebook: string | null,
-    website: string | null,
-    vk: string | null,
-    twitter: string | null,
-    instagram: string | null,
-    youtube: string | null,
-    github: string | null,
-    mainLink: string | null
-  },
+  contacts: ContactsType,
   lookingForAJob: boolean,
   lookingForAJobDescription: string | null,
   fullName: string,
@@ -24,6 +16,17 @@ export type ProfileType = {
 export type ProfilePhotosType = {
   small: string | undefined,
   large: string | undefined
+}
+
+export type ContactsType = {
+  facebook: string | null,
+  website: string | null,
+  vk: string | null,
+  twitter: string | null,
+  instagram: string | null,
+  youtube: string | null,
+  github: string | null,
+  mainLink: string | null
 }
 
 export type ProfilePageType = {
@@ -105,7 +108,7 @@ export const savePhotoTC = (file: File) => (dispatch: Dispatch) => {
     })
 }
 
-export const setUserProfileTC = (userID: string) => (dispatch: Dispatch) => {
+export const setUserProfileTC = (userID: string | null) => (dispatch: Dispatch) => {
   profileAPI.getUserProfile(userID).then(response => {
     dispatch(setUserProfile(response))
   })
@@ -120,5 +123,12 @@ export const setUserStatusTC = (userID: string) => (dispatch: Dispatch) => {
 export const updateUserStatusTC = (status: string) => (dispatch: Dispatch) => {
   profileAPI.updateUserStatus(status).then(response => {
     response.resultCode === 0 && dispatch(setUserStatus(status))
+  })
+}
+
+export const updateProfileDataTC = (data: ProfileDataEditFormType) => (dispatch: AppDispatchType, getState: () => StateType) => {
+  const userId = getState().auth.userID
+  profileAPI.saveProfileData(data).then(response => {
+    response.resultCode === 0 && dispatch(setUserProfileTC(userId))
   })
 }

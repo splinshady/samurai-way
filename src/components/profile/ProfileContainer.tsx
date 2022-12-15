@@ -6,12 +6,13 @@ import {
   ProfileType,
   savePhotoTC,
   setUserProfileTC,
-  setUserStatusTC,
+  setUserStatusTC, updateProfileDataTC,
   updateUserStatusTC
 } from "../../state/profile-reducer";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {compose} from "redux";
 import WithAuthRedirect from "../../hoc/withAuthRedirect";
+import {ProfileDataEditFormType} from "./profileUserAboutData/ProfileUserAboutDataEdit";
 
 type PathParamsType = {
   userId: string,
@@ -28,6 +29,7 @@ type MapDispatchPropsType = {
   setUserStatusTC: (userID: string | null) => void
   updateUserStatusTC: (status: string) => void
   savePhotoTC: (file: File) => void
+  updateProfileDataTC: (data: ProfileDataEditFormType) => void
 }
 export type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & MapStateToPropsType & MapDispatchPropsType
 
@@ -69,7 +71,7 @@ const mapStateToProps = (state: StateType): MapStateToPropsType => {
 }
 
 export default compose<React.ComponentType>(
-  connect(mapStateToProps, {setUserProfileTC, savePhotoTC, setUserStatusTC, updateUserStatusTC}),
+  connect(mapStateToProps, {setUserProfileTC, updateProfileDataTC, savePhotoTC, setUserStatusTC, updateUserStatusTC}),
   withRouter,
   WithAuthRedirect
 )(ProfileContainer)

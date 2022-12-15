@@ -1,4 +1,5 @@
 import axios from "axios";
+import {ProfileDataEditFormType} from "../components/profile/profileUserAboutData/ProfileUserAboutDataEdit";
 
 const instance = axios.create({
   withCredentials: true,
@@ -36,7 +37,7 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-  getUserProfile(userId: string) {
+  getUserProfile(userId: string | null) {
     return instance.get(`profile/${userId}`)
       .then(response => {
         return response.data
@@ -63,6 +64,12 @@ export const profileAPI = {
         'Content-Type': 'multipart/form-data'
       }
     })
+      .then(response => {
+        return response.data
+      })
+  },
+  saveProfileData(data: ProfileDataEditFormType) {
+    return instance.put(`profile/`, data)
       .then(response => {
         return response.data
       })
