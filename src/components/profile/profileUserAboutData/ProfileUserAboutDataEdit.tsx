@@ -1,11 +1,8 @@
-import React, {FC} from 'react';
-import {ContactsType, ProfileType} from "../../../state/profile-reducer";
-import {ContactsItem} from "./ContactsItem";
+import React from 'react';
+import {ContactsType} from "../../../state/profile-reducer";
 import style from "./ProfileUserAboutData.module.css";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../../common/formControl/Input";
-import {requiredField} from "../../../utils/validators";
-import {LoginForm, LoginFormType} from "../../login/LoginForm";
 
 export type ProfileDataEditFormType = {
   aboutMe: string | null,
@@ -124,7 +121,7 @@ const ProfileUserAboutDataEdit = (props: ProfileUserAboutDataEditPropsType) => {
 
           </div>
         </div>
-
+        {props.error &&  <span className={style.common_form_error}>{props.error}</span>}
         <button type='submit'>save</button>
       </form>
     </>

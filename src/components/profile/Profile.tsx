@@ -14,7 +14,9 @@ const Profile: React.FC<ProfileInfoType> = (props) => {
             <ProfileInfo userStatus={props.userStatus}
                          updateStatus={props.updateUserStatusTC}
                          isOwner={props.isOwner}
+                         isEditProfile={props.isEditProfile}
                          savePhoto={props.savePhotoTC}
+                         setIsEditProfile={props.setIsEditProfile}
                          saveProfileData={props.updateProfileDataTC}
                          profile={props.profile}/>
             <MyPosts />

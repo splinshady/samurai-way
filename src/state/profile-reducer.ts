@@ -2,6 +2,8 @@ import {ActionsTypes, AppDispatchType, StateType} from "./redux-store";
 import {profileAPI} from "../api/api";
 import {Dispatch} from "redux";
 import {ProfileDataEditFormType} from "../components/profile/profileUserAboutData/ProfileUserAboutDataEdit";
+import {stopSubmit} from "redux-form";
+import {rejects} from "assert";
 
 export type ProfileType = {
   aboutMe: string | null,
@@ -32,6 +34,7 @@ export type ContactsType = {
 export type ProfilePageType = {
   profile: ProfileType,
   userStatus: string
+  isEditProfile: boolean
 }
 
 const initialState: ProfilePageType = {
@@ -56,7 +59,8 @@ const initialState: ProfilePageType = {
       large: 'string | null'
     }
   },
-  userStatus: 'status'
+  userStatus: 'status',
+  isEditProfile: false
 }
 
 export const profileReducer = (state = initialState, action: ActionsTypes): ProfilePageType => {
@@ -65,6 +69,8 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
       return {...state, profile: action.profile}
     case 'SET-USER-STATUS':
       return {...state, userStatus: action.status}
+    case 'SET-IS-EDIT-PROFILE':
+      return {...state, isEditProfile: action.isEditProfile}
     case 'SET-USER-PHOTO':
       return {
         ...state,
@@ -81,6 +87,13 @@ export const setUserProfile = (profile: ProfileType) => {
   return {
     type: 'SET-USER-PROFILE',
     profile
+  } as const
+}
+
+export const setIsEditProfile = (isEditProfile: boolean) => {
+  return {
+    type: 'SET-IS-EDIT-PROFILE',
+    isEditProfile
   } as const
 }
 
@@ -129,6 +142,12 @@ export const updateUserStatusTC = (status: string) => (dispatch: Dispatch) => {
 export const updateProfileDataTC = (data: ProfileDataEditFormType) => (dispatch: AppDispatchType, getState: () => StateType) => {
   const userId = getState().auth.userID
   profileAPI.saveProfileData(data).then(response => {
-    response.resultCode === 0 && dispatch(setUserProfileTC(userId))
+    if (response.resultCode === 0) {
+      dispatch(setUserProfileTC(userId))
+      dispatch(setIsEditProfile(false))
+    } else {
+      const message = response.messages.length ? response.messages[0] : 'Something went wrong'
+      dispatch(stopSubmit('profile-contacts', {_error: message}))
+    }
   })
 }

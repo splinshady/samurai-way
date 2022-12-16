@@ -11,13 +11,14 @@ type ProfileInfoPropsType = {
   profile: ProfileType
   userStatus: string
   isOwner: boolean
+  isEditProfile: boolean
   updateStatus: (status: string) => void
   savePhoto: (file: File) => void
+  setIsEditProfile: (isEditProfile: boolean) => void
   saveProfileData: (data: ProfileDataEditFormType) => void
 }
 
 const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
-  const [editMode, setEditMode] = useState(false)
 
   const onPhotoSelected = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -27,7 +28,6 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
 
   const onEditDataSubmit = (formData: ProfileDataEditFormType) => {
     props.saveProfileData(formData)
-    setEditMode(false)
   }
 
   return (
@@ -36,11 +36,11 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
       {props.isOwner && <input type="file" onChange={onPhotoSelected}/>}
       <span>{props.profile.fullName}</span>
       <ProfileStatus userStatus={props.userStatus} updateStatus={props.updateStatus}/>
-      {editMode
+      {props.isEditProfile
         ? <ProfileUserAboutDataEditForm initialValues={props.profile} onSubmit={onEditDataSubmit}/>
         : <ProfileUserAboutData profile={props.profile}/>
       }
-      {props.isOwner && <button onClick={() => setEditMode(true)}>edit profile</button>}
+      {props.isOwner && <button onClick={() => props.setIsEditProfile(true)}>edit profile</button>}
     </div>
   );
 };

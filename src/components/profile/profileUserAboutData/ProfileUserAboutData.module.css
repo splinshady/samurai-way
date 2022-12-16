@@ -24,3 +24,9 @@
 .contact_value {
     font-size: 14px;
 }
+
+.common_form_error {
+    padding: 3px;
+    color: red;
+    border: 1px solid red;
+}

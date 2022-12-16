@@ -4,7 +4,7 @@ import Profile from "./Profile";
 import {StateType} from "../../state/redux-store";
 import {
   ProfileType,
-  savePhotoTC,
+  savePhotoTC, setIsEditProfile,
   setUserProfileTC,
   setUserStatusTC, updateProfileDataTC,
   updateUserStatusTC
@@ -23,12 +23,14 @@ type MapStateToPropsType = {
   userStatus: string
   authorizedUserID: string | null
   isAuth: boolean
+  isEditProfile: boolean
 }
 type MapDispatchPropsType = {
   setUserProfileTC: (userID: string | null) => void
   setUserStatusTC: (userID: string | null) => void
   updateUserStatusTC: (status: string) => void
   savePhotoTC: (file: File) => void
+  setIsEditProfile: (isEditProfile: boolean) => void
   updateProfileDataTC: (data: ProfileDataEditFormType) => void
 }
 export type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & MapStateToPropsType & MapDispatchPropsType
@@ -66,12 +68,20 @@ const mapStateToProps = (state: StateType): MapStateToPropsType => {
     profile: state.profilePage.profile,
     userStatus: state.profilePage.userStatus,
     authorizedUserID: state.auth.userID,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    isEditProfile: state.profilePage.isEditProfile
   }
 }
 
 export default compose<React.ComponentType>(
-  connect(mapStateToProps, {setUserProfileTC, updateProfileDataTC, savePhotoTC, setUserStatusTC, updateUserStatusTC}),
+  connect(mapStateToProps, {
+    setUserProfileTC,
+    updateProfileDataTC,
+    savePhotoTC,
+    setUserStatusTC,
+    updateUserStatusTC,
+    setIsEditProfile
+  }),
   withRouter,
   WithAuthRedirect
 )(ProfileContainer)

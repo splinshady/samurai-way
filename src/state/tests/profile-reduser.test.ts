@@ -25,7 +25,8 @@ beforeEach(() => {
         large: undefined
       }
     },
-    userStatus: ''
+    userStatus: '',
+    isEditProfile: false
   }
 })
 
