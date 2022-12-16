@@ -83,6 +83,12 @@ export const authAPI = {
         return response.data
       })
   },
+  getCaptchaUrl() {
+    return instance.get(`/security/get-captcha-url`)
+      .then(response => {
+        return response.data
+      })
+  },
   login(data: LoginDataType) {
     return instance.post(`auth/login`, data)
       .then(response => {

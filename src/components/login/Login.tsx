@@ -7,6 +7,7 @@ import {Redirect} from "react-router-dom";
 type LoginPropsType = {
   onSubmit: (formData: LoginFormType) => void
   isAuth: boolean
+  captcha: string | null
 }
 
 const Login: React.FC<LoginPropsType> = (props) => {
@@ -21,7 +22,7 @@ const Login: React.FC<LoginPropsType> = (props) => {
   return (
     <section className={`${style.login_container} shadow_section`}>
       <h1>Login</h1>
-      <ReduxLoginForm onSubmit={onSubmit}/>
+      <ReduxLoginForm onSubmit={onSubmit} captcha={props.captcha}/>
     </section>
   );
 };

@@ -11,7 +11,7 @@ import {
     usersReducer
 } from "./users-reducer";
 import {profileReducer, setIsEditProfile, setPhotos, setUserProfile, setUserStatus} from "./profile-reducer";
-import {authReducer, setAuthUserData, setIsInitialized} from "./auth-reduser";
+import {authReducer, setAuthUserData, setCaptcha, setIsInitialized} from "./auth-reduser";
 import {FormAction, reducer as formReducer, stopSubmit} from "redux-form";
 
 export type dialogsType = {
@@ -47,6 +47,7 @@ export type ActionsTypes = ReturnType<typeof addMessageAC
     | typeof setUsers
     | typeof setIsInitialized
     | typeof setPhotos
+    | typeof setCaptcha
     | typeof setIsEditProfile
     | typeof setUserStatus>
 

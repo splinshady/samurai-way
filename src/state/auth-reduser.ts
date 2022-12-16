@@ -10,6 +10,7 @@ export type authType = {
   login: string | null
   isAuth: boolean
   isInitialized: boolean
+  captcha: string | null
 }
 
 const initialState: authType = {
@@ -18,6 +19,7 @@ const initialState: authType = {
   email: null,
   isAuth: false,
   isInitialized: false,
+  captcha: null
 }
 
 export const authReducer = (state = initialState, action: ActionsTypes): authType => {
@@ -32,6 +34,12 @@ export const authReducer = (state = initialState, action: ActionsTypes): authTyp
       return {
         ...state,
         isInitialized: action.isInitialized,
+      }
+    }
+    case 'SET-CAPTCHA' : {
+      return {
+        ...state,
+        captcha: action.captcha,
       }
     }
     default:
@@ -52,6 +60,13 @@ export const setIsInitialized = (isInitialized: boolean) => {
   return {
     type: 'SET-IS-INITIALIZED',
     isInitialized
+  } as const
+}
+
+export const setCaptcha = (captcha: null | string) => {
+  return {
+    type: 'SET-CAPTCHA',
+    captcha
   } as const
 }
 
@@ -81,12 +96,21 @@ export const loginTC = (data: LoginDataType) => (dispatch: AppDispatchType) => {
       if (response.resultCode === 0) {
         dispatch(authMeTC())
       } else {
+        if (response.resultCode === 10) {
+          dispatch(getCaptchaUrlTC())
+        }
         const message = response.messages.length ? response.messages[0] : 'Something went wrong'
         dispatch(stopSubmit('login', {_error: message}))
       }
     })
 }
 
+export const getCaptchaUrlTC = () => (dispatch: AppDispatchType) => {
+  authAPI.getCaptchaUrl()
+    .then(response => {
+      dispatch(setCaptcha(response.url))
+    })
+}
 
 export const logoutTC = () => (dispatch: AppDispatchType) => {
   authAPI.logout()

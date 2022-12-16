@@ -8,6 +8,7 @@ import Login from "./Login";
 
 type MapStatePropsType = {
   isAuth: boolean
+  captcha: string | null
 }
 
 type MapDispatchPropsType = {
@@ -22,13 +23,14 @@ class LoginContainer extends React.Component<LoginContainerPropsType, any> {
   }
 
   render() {
-    return <Login onSubmit={this.onSubmit} isAuth={this.props.isAuth}/>;
+    return <Login onSubmit={this.onSubmit} isAuth={this.props.isAuth} captcha={this.props.captcha}/>;
   }
 }
 
 const MapStateProps = (state: StateType): MapStatePropsType=> {
   return {
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captcha: state.auth.captcha
   }
 }
 
