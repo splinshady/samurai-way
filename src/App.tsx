@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Navbar from "./components/navbar/Navbar";
 import ProfileContainer from "./components/profile/ProfileContainer";
-import {Route, withRouter} from "react-router-dom";
+import {Redirect, Route, withRouter} from "react-router-dom";
 import DialogsContainer from "./components/dialogs/DialogsContainer";
 import UsersContainer from "./components/users/UsersContainer";
 import HeaderContainer from "./components/header/HeaderContainer";
@@ -26,11 +26,8 @@ class App extends React.Component<AppPropsType, any> {
       <div className="App">
         <HeaderContainer/>
         <Navbar/>
-        <Route path='/dialogs' render={
-          () => <DialogsContainer/>
-        }
-
-        />
+        <Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>
+        <Route path='/dialogs' render={() => <DialogsContainer/>}/>
         <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
         <Route path='/users' render={() => <UsersContainer/>}/>
         <Route path='/login' render={() => <LoginContainer/>}/>
