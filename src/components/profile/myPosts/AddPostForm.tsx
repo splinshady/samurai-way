@@ -8,11 +8,11 @@ export type AddPostFormType = {
   postText: string
 }
 
-const maxLength = maxLengthCreator(3)
+const maxLength = maxLengthCreator(140)
 
 const AddPostForm = (props: InjectedFormProps<AddPostFormType>) => {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={props.handleSubmit} >
       <Field placeholder={'post text'}
              name={'postText'}
              component={Textarea}
