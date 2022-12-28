@@ -1,8 +1,8 @@
 import React from 'react';
-import {setCurrentPageTC, UserType} from "../../state/users-reducer";
-import {NavLink} from "react-router-dom";
+import {UserType} from "../../state/users-reducer";
 import {Paginator} from "../common/paginator/Paginator";
 import {User} from "./user/User";
+import style from "./User.module.css";
 
 export type UsersPropsType = {
   users: UserType[]
@@ -19,19 +19,21 @@ export type UsersPropsType = {
 
 export function Users(props: UsersPropsType) {
 
-  return <div>
+  return <div className={`${style.users} shadow_section`}>
     <Paginator pageSize={props.pageSize}
                setCurrentPage={props.setCurrentPage}
                currentPage={props.currentPage}
                totalItemsCount={props.totalUsersCount}
                portionSize={props.portionsSize}
     />
-    {props.users.map(user => {
-      return <User user={user}
-                   key={user.id}
-                   followUserTC={props.followUserTC}
-                   followingInProgress={props.followingInProgress}
-                   unfollowUserTC={props.unfollowUserTC}/>
-    })}
+    <div className={`${style.users_container}`}>
+      {props.users.map(user => {
+        return <User user={user}
+                     key={user.id}
+                     followUserTC={props.followUserTC}
+                     followingInProgress={props.followingInProgress}
+                     unfollowUserTC={props.unfollowUserTC}/>
+      })}
+    </div>
   </div>
 }

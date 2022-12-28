@@ -1,7 +1,32 @@
 .user_avatar {
-    width: 60px;
+    width: 150px;
+    align-self: center;
 }
 
-.currentPage {
-    color: hotpink;
+.users {
+    display: flex;
+    flex-flow: column;
+    flex-grow: 1;
+    width: 200px;
+    padding: 10px;
+}
+
+.users_container {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 20px;
+    justify-content: space-around;
+    flex-grow: 1;
+    padding: 10px;
+}
+
+.user_container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 250px;
+    border-radius: 10px;
+    gap: 20px;
+    padding: 20px;
+    background-color: rgba(95, 129, 32, 0.29);
 }

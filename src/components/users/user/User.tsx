@@ -13,7 +13,7 @@ export type UserPropsType = {
 
 export const User: React.FC<UserPropsType> = ({user, followUserTC, unfollowUserTC, followingInProgress}) => {
   return (
-    <div key={user.id}>
+    <div key={user.id} className={style.user_container}>
       <NavLink to={`profile/${user.id}`}>
         <img src={user.photos.small ? user.photos.small : defaultPhoto}
              alt="user's avatar"
