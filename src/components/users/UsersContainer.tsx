@@ -3,13 +3,18 @@ import {connect} from "react-redux";
 import {Users} from "./Users";
 import {StateType} from "../../state/redux-store";
 import {
-  followUserTC, getUsersTC,
-  setCurrentPage, setCurrentPageTC, setFollowingInProgress, setIsFetching, setPortionNumber,
+  followUserTC,
+  getUsersTC,
+  setCurrentPage,
+  setCurrentPageTC,
+  setFollowingInProgress,
+  setIsFetching,
+  setPortionNumber,
   setTotalUsersCount,
-  setUsers, unfollowUserTC,
+  setUsers,
+  unfollowUserTC,
   UserType
 } from "../../state/users-reducer";
-import {Loader} from "../common/loader";
 import {compose} from "redux";
 
 type MapStatePropsType = {

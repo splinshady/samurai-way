@@ -11,6 +11,7 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {initializeAppTC} from "./state/auth-reduser";
 import {StateType} from "./state/redux-store";
+import CircularProgress from "@mui/material/CircularProgress";
 
 
 class App extends React.Component<AppPropsType, any> {
@@ -20,13 +21,13 @@ class App extends React.Component<AppPropsType, any> {
 
   render() {
     if (!this.props.isInitialized) {
-      return <h2>Please wait...</h2>
+      return <CircularProgress/>
     }
     return (
       <div className="App">
         <HeaderContainer/>
         <Navbar/>
-        <Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>
+        <Route exact path='/' render={() => <Redirect to={'/users'}/>}/>
         <Route path='/dialogs' render={() => <DialogsContainer/>}/>
         <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
         <Route path='/users' render={() => <UsersContainer/>}/>
