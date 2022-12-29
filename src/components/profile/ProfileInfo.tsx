@@ -41,7 +41,7 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
         ? <ProfileUserAboutDataEditForm initialValues={props.profile} onSubmit={onEditDataSubmit}/>
         : <ProfileUserAboutData profile={props.profile}/>
       }
-      {props.isOwner && <Button onClick={() => props.setIsEditProfile(true)}>edit profile</Button>}
+      {props.isOwner && !props.isEditProfile && <Button onClick={() => props.setIsEditProfile(true)}>edit profile</Button>}
     </div>
   );
 };

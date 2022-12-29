@@ -46,18 +46,18 @@ class UsersContainer extends React.Component<UsersContainerPropsType, any> {
   }
 
   render() {
-    return this.props.isFetching ? <Loader/> : <Users users={this.props.users}
-                                                      totalUsersCount={this.props.totalUsersCount}
-                                                      pageSize={this.props.pageSize}
-                                                      portionsSize={this.props.portionsSize}
-                                                      followingInProgress={this.props.followingInProgress}
-                                                      setFollowingInProgress={this.props.setFollowingInProgress}
-                                                      setCurrentPage={this.setCurrentPage}
-                                                      portionNumber={this.props.portionNumber}
-                                                      setPortionNumber={this.props.setPortionNumber}
-                                                      followUserTC={this.props.followUserTC}
-                                                      unfollowUserTC={this.props.unfollowUserTC}
-                                                      currentPage={this.props.currentPage}/>
+    return <Users users={this.props.users}
+                  totalUsersCount={this.props.totalUsersCount}
+                  pageSize={this.props.pageSize}
+                  portionsSize={this.props.portionsSize}
+                  followingInProgress={this.props.followingInProgress}
+                  setFollowingInProgress={this.props.setFollowingInProgress}
+                  setCurrentPage={this.setCurrentPage}
+                  portionNumber={this.props.portionNumber}
+                  setPortionNumber={this.props.setPortionNumber}
+                  followUserTC={this.props.followUserTC}
+                  unfollowUserTC={this.props.unfollowUserTC}
+                  currentPage={this.props.currentPage}/>
 
   }
 };
