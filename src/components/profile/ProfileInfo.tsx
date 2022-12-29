@@ -6,6 +6,7 @@ import style from "./Profile.module.css";
 import {ProfileUserAboutData} from "./profileUserAboutData/ProfileUserAboutData";
 import {ProfileDataEditFormType, ProfileUserAboutDataEditForm} from "./profileUserAboutData/ProfileUserAboutDataEdit";
 import {LoginFormType} from "../login/LoginForm";
+import {Button} from "../common/Button/Button";
 
 type ProfileInfoPropsType = {
   profile: ProfileType
@@ -40,7 +41,7 @@ const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
         ? <ProfileUserAboutDataEditForm initialValues={props.profile} onSubmit={onEditDataSubmit}/>
         : <ProfileUserAboutData profile={props.profile}/>
       }
-      {props.isOwner && <button onClick={() => props.setIsEditProfile(true)}>edit profile</button>}
+      {props.isOwner && <Button onClick={() => props.setIsEditProfile(true)}>edit profile</Button>}
     </div>
   );
 };

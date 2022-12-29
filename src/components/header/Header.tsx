@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './Header.module.css';
 import logo from '../../assets/icons/incubator.png';
+import {Button} from "../common/Button/Button";
 
 type HeaderPropsType = {
   isAuth: boolean
@@ -16,13 +17,11 @@ const Header: React.FC<HeaderPropsType> = ({isAuth, login, logout}) => {
       <div className={style.logout_container}>
         {
           isAuth
-            ?
+            &&
             <div>
               <span className={style.user_login}>{login}</span>
-              <span className={style.logout} onClick={logout}>Log out</span>
+              <Button onClick={logout}>Log out</Button>
             </div>
-            :
-            <span>Log in</span>
         }
       </div>
     </header>

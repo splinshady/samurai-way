@@ -3,6 +3,7 @@ import {NavLink} from "react-router-dom";
 import defaultPhoto from "../../../assets/icons/user.png";
 import style from "../User.module.css";
 import {UserType} from "../../../state/users-reducer";
+import {Button} from "../../common/Button/Button";
 
 export type UserPropsType = {
   user: UserType
@@ -20,15 +21,15 @@ export const User: React.FC<UserPropsType> = ({user, followUserTC, unfollowUserT
              className={style.user_avatar}/>
       </NavLink>
       {user.followed
-        ? <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
+        ? <Button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
           unfollowUserTC(user.id)
-        }}>unfollow</button>
-        : <button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
+        }}>unfollow</Button>
+        : <Button disabled={followingInProgress.some(id => id === user.id)} onClick={() => {
           followUserTC(user.id)
-        }}>follow</button>
+        }}>follow</Button>
       }
-      <h3>{user.name}</h3>
-      <span>{user.status}</span>
+      <h3 className={style.user_name}>{user.name}</h3>
+      <span className={style.user_status}>{user.status}</span>
     </div>
   );
 };

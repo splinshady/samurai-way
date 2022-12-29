@@ -3,6 +3,7 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import styles from "./MessagesWindow.module.css";
 import {Textarea} from "../../common/formControl/Textarea";
 import {maxLengthCreator, requiredField} from "../../../utils/validators";
+import {Button} from "../../common/Button/Button";
 
 export type AddMessageFormType = {
   message: string
@@ -19,7 +20,7 @@ const AddMessageForm = (props: InjectedFormProps<AddMessageFormType>) => {
              validate={[requiredField, maxLength]}
              className={styles.input_textarea}
       />
-      <button>Post</button>
+      <Button>Post</Button>
     </form>
   );
 };

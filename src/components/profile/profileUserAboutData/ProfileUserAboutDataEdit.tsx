@@ -3,6 +3,7 @@ import {ContactsType} from "../../../state/profile-reducer";
 import style from "./ProfileUserAboutData.module.css";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../../common/formControl/Input";
+import {Button} from "../../common/Button/Button";
 
 export type ProfileDataEditFormType = {
   aboutMe: string | null,
@@ -122,7 +123,7 @@ const ProfileUserAboutDataEdit = (props: ProfileUserAboutDataEditPropsType) => {
           </div>
         </div>
         {props.error &&  <span className={style.common_form_error}>{props.error}</span>}
-        <button type='submit'>save</button>
+        <Button type='submit'>save</Button>
       </form>
     </>
   )

@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
-import style from "../../users/User.module.css";
+import React from 'react';
+import style from "./Paginator.module.css";
+import {Button} from "../Button/Button";
 
 type PaginatorPropsType = {
   totalItemsCount: number
@@ -29,7 +30,7 @@ export const Paginator: React.FC<PaginatorPropsType> = (props) => {
   return (
     <div className={style.paginator_container}>
       {props.portionNumber > 1 &&
-        <button onClick={() => props.setPortionNumber(props.portionNumber - 1)}>prev</button>
+        <Button onClick={() => props.setPortionNumber(props.portionNumber - 1)}>prev</Button>
       }
       {pages
         .filter(page => (page >= leftPageNumber && page <= rightPageNumber))
@@ -40,7 +41,7 @@ export const Paginator: React.FC<PaginatorPropsType> = (props) => {
         })
       }
       {portionCount > props.portionNumber &&
-        <button onClick={() => props.setPortionNumber(props.portionNumber + 1)}>next</button>
+        <Button onClick={() => props.setPortionNumber(props.portionNumber + 1)}>next</Button>
       }
     </div>
   );

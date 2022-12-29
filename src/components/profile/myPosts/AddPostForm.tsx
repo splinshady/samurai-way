@@ -3,6 +3,7 @@ import style from "./MyPosts.module.css";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Textarea} from "../../common/formControl/Textarea";
 import {maxLengthCreator, requiredField} from "../../../utils/validators";
+import {Button} from "../../common/Button/Button";
 
 export type AddPostFormType = {
   postText: string
@@ -18,7 +19,7 @@ const AddPostForm = (props: InjectedFormProps<AddPostFormType>) => {
              component={Textarea}
              validate={[requiredField, maxLength]}
       />
-      <button>Post</button>
+      <Button>Post</Button>
     </form>
   );
 };

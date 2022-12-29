@@ -3,6 +3,7 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, requiredField} from "../../utils/validators";
 import {Input} from "../common/formControl/Input";
 import style from "./Login.module.css";
+import {Button} from "../common/Button/Button";
 
 export type LoginFormType = {
   email: string
@@ -43,7 +44,7 @@ export const LoginForm = (props: LoginFormPropsType) => {
       />
       }
       {props.error &&  <span className={style.common_form_error}>Error</span>}
-      <button type='submit'>Login</button>
+      <Button type='submit'>Login</Button>
     </form>
   );
 };
