@@ -12,6 +12,8 @@ export type UsersPropsType = {
   setCurrentPage: (page: number) => void
   setFollowingInProgress: (userID: string, inFollowing: boolean) => void
   currentPage: number
+  portionNumber: number
+  setPortionNumber: (portionNumber: number) => void
   followingInProgress: string[]
   followUserTC: (useID: string) => void
   unfollowUserTC: (useID: string) => void
@@ -25,6 +27,8 @@ export function Users(props: UsersPropsType) {
                currentPage={props.currentPage}
                totalItemsCount={props.totalUsersCount}
                portionSize={props.portionsSize}
+               portionNumber={props.portionNumber}
+               setPortionNumber={props.setPortionNumber}
     />
     <div className={`${style.users_container}`}>
       {props.users.map(user => {

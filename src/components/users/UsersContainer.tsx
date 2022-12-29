@@ -4,7 +4,7 @@ import {Users} from "./Users";
 import {StateType} from "../../state/redux-store";
 import {
   followUserTC, getUsersTC,
-  setCurrentPage, setCurrentPageTC, setFollowingInProgress, setIsFetching,
+  setCurrentPage, setCurrentPageTC, setFollowingInProgress, setIsFetching, setPortionNumber,
   setTotalUsersCount,
   setUsers, unfollowUserTC,
   UserType
@@ -18,6 +18,7 @@ type MapStatePropsType = {
   portionsSize: number
   totalUsersCount: number
   currentPage: number
+  portionNumber: number
   isFetching: boolean
   followingInProgress: string[]
 }
@@ -29,6 +30,7 @@ type MapDispatchPropsType = {
   setFollowingInProgress: (userID: string, inFollowing: boolean) => void,
   followUserTC: (useID: string) => void,
   unfollowUserTC: (useID: string) => void,
+  setPortionNumber: (portionNumber: number) => void,
   getUsersTC: (users: UserType[], currentPage: number, pageSize: number) => void,
   setCurrentPageTC: (pageNumber: number, pageSize: number) => void,
 }
@@ -51,6 +53,8 @@ class UsersContainer extends React.Component<UsersContainerPropsType, any> {
                                                       followingInProgress={this.props.followingInProgress}
                                                       setFollowingInProgress={this.props.setFollowingInProgress}
                                                       setCurrentPage={this.setCurrentPage}
+                                                      portionNumber={this.props.portionNumber}
+                                                      setPortionNumber={this.props.setPortionNumber}
                                                       followUserTC={this.props.followUserTC}
                                                       unfollowUserTC={this.props.unfollowUserTC}
                                                       currentPage={this.props.currentPage}/>
@@ -61,6 +65,7 @@ class UsersContainer extends React.Component<UsersContainerPropsType, any> {
 const mapStateToProps = (state: StateType): MapStatePropsType => {
   return {
     users: state.usersPage.users,
+    portionNumber: state.usersPage.portionNumber,
     pageSize: state.usersPage.pageSize,
     portionsSize: state.usersPage.portionsSize,
     totalUsersCount: state.usersPage.totalUsersCount,
@@ -81,6 +86,7 @@ export default compose<React.ComponentType>(
     followUserTC,
     unfollowUserTC,
     getUsersTC,
+    setPortionNumber,
     setCurrentPageTC,
   })
 )(UsersContainer)

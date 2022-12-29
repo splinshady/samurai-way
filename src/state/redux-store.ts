@@ -2,13 +2,13 @@ import {applyMiddleware, combineReducers, legacy_createStore} from "redux";
 import {addMessageAC, dialogsReducer} from "./dialogs-reduser";
 import thunkMiddleware, {ThunkDispatch} from "redux-thunk";
 import {
-    follow,
-    setCurrentPage, setFollowingInProgress,
-    setIsFetching,
-    setTotalUsersCount,
-    setUsers,
-    unfollow,
-    usersReducer
+  follow,
+  setCurrentPage, setFollowingInProgress,
+  setIsFetching, setPortionNumber,
+  setTotalUsersCount,
+  setUsers,
+  unfollow,
+  usersReducer
 } from "./users-reducer";
 import {profileReducer, setIsEditProfile, setPhotos, setUserProfile, setUserStatus} from "./profile-reducer";
 import {authReducer, setAuthUserData, setCaptcha, setIsInitialized} from "./auth-reduser";
@@ -48,6 +48,7 @@ export type ActionsTypes = ReturnType<typeof addMessageAC
     | typeof setIsInitialized
     | typeof setPhotos
     | typeof setCaptcha
+    | typeof setPortionNumber
     | typeof setIsEditProfile
     | typeof setUserStatus>
 

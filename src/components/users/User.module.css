@@ -30,3 +30,30 @@
     padding: 20px;
     background-color: rgba(95, 129, 32, 0.29);
 }
+
+.paginator_container {
+    padding: 20px 0;
+    display: flex;
+    align-self: center;
+    gap: 5px;
+}
+
+.page_number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background-color: #eee5ff;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.page_number:hover {
+    background-color: #c9b0ff;
+}
+
+.current_page {
+    background-color: #834cff;
+    color: white;
+}

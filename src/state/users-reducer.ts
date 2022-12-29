@@ -21,6 +21,7 @@ export type UsersPageType = {
   currentPage: number
   isFetching: boolean
   followingInProgress: string[]
+  portionNumber: number
 }
 
 const initialState: UsersPageType = {
@@ -31,6 +32,7 @@ const initialState: UsersPageType = {
   currentPage: 1,
   isFetching: false,
   followingInProgress: [],
+  portionNumber: 1,
 }
 
 export const usersReducer = (state: UsersPageType = initialState, action: ActionsTypes): UsersPageType => {
@@ -61,6 +63,9 @@ export const usersReducer = (state: UsersPageType = initialState, action: Action
     case 'SET-IS-FETCHING': {
       return {...state, isFetching: action.isFetching}
     }
+    case 'SET-IS-PORTION-NUMBER': {
+      return {...state, portionNumber: action.portionNumber}
+    }
     case 'SET-FOLLOWING-IN-PROGRESS': {
       return {
         ...state,
@@ -80,6 +85,12 @@ export const follow = (userID: string) => {
   return {
     type: 'FOLLOW',
     userID: userID
+  } as const
+}
+export const setPortionNumber = (portionNumber: number) => {
+  return {
+    type: 'SET-IS-PORTION-NUMBER',
+    portionNumber: portionNumber
   } as const
 }
 export const unfollow = (userID: string) => {
