@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { messageType } from '../../../state/redux-store'
 import style from '../dialogs-people/person-dialog/PersonDialog.module.css'
@@ -13,8 +13,20 @@ type MessagesWindowPropsType = {
 }
 
 const MessagesWindow = (props: MessagesWindowPropsType) => {
+  const [ws, setWs] = useState<WebSocket>()
+
+  useEffect(() => {
+    const localWs = new WebSocket('https://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+
+    localWs.onmessage = messageEvent => {
+      console.log(messageEvent)
+    }
+
+    setWs(localWs)
+  }, [])
   const sendMessageClickHandler = (formData: AddMessageFormType) => {
     props.sendMessage(formData.message)
+    ws && ws.send(formData.message)
   }
 
   return (
