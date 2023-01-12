@@ -1,27 +1,31 @@
 .person_dialog {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 5px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    color: #52575C;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  padding: 5px 20px;
+
+  color: #52575c;
+  text-decoration: none;
+
+  border-radius: 5px;
 }
 
 .avatar {
-    width: 40px;
+  width: 40px;
 }
 
 .name {
 }
 
-
 .person_dialog:hover {
-    color: #336CFB;
-    background-color: #f4fbff;
+  color: #336cfb;
+
+  background-color: #f4fbff;
 }
 
 .active {
-    color: #336CFB;
-    background-color: transparent;
+  color: #336cfb;
+
+  background-color: transparent;
 }

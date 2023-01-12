@@ -1,13 +1,17 @@
-import React from "react";
-import {connect} from "react-redux";
-import {loginTC} from "../../state/auth-reduser";
-import {LoginFormType} from "./LoginForm";
-import {compose} from "redux";
-import {StateType} from "../../state/redux-store";
-import Login from "./Login";
+import React from 'react'
+
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+
+import { loginTC } from '../../state/auth-reduser'
+import { StateType } from '../../state/redux-store'
+
+import Login from './Login'
+import { LoginFormType } from './LoginForm'
 
 type MapStatePropsType = {
   isAuth: boolean
+
   captcha: string | null
 }
 
@@ -23,17 +27,17 @@ class LoginContainer extends React.Component<LoginContainerPropsType, any> {
   }
 
   render() {
-    return <Login onSubmit={this.onSubmit} isAuth={this.props.isAuth} captcha={this.props.captcha}/>;
+    return (
+      <Login onSubmit={this.onSubmit} isAuth={this.props.isAuth} captcha={this.props.captcha} />
+    )
   }
 }
 
-const MapStateProps = (state: StateType): MapStatePropsType=> {
+const MapStateProps = (state: StateType): MapStatePropsType => {
   return {
     isAuth: state.auth.isAuth,
-    captcha: state.auth.captcha
+    captcha: state.auth.captcha,
   }
 }
 
-export default compose<React.ComponentType>(
-  connect(MapStateProps, {loginTC})
-)(LoginContainer)
+export default compose<React.ComponentType>(connect(MapStateProps, { loginTC }))(LoginContainer)

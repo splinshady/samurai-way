@@ -1,10 +1,10 @@
 .myPosts {
-
 }
 
 .myPosts__posts_container {
-    display: flex;
-    flex-flow: row wrap;
-    padding: 10px;
-    gap: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 10px;
+
+  padding: 10px;
 }

@@ -1,38 +1,39 @@
-import {ActionsTypes, AppDispatchType, StateType} from "./redux-store";
-import {profileAPI} from "../api/api";
-import {Dispatch} from "redux";
-import {ProfileDataEditFormType} from "../components/profile/profileUserAboutData/ProfileUserAboutDataEdit";
-import {stopSubmit} from "redux-form";
-import {rejects} from "assert";
+import { Dispatch } from 'redux'
+import { stopSubmit } from 'redux-form'
+
+import { profileAPI } from '../api/api'
+import { ProfileDataEditFormType } from '../components/profile/profileUserAboutData/ProfileUserAboutDataEdit'
+
+import { ActionsTypes, AppDispatchType, StateType } from './redux-store'
 
 export type ProfileType = {
-  aboutMe: string | null,
-  contacts: ContactsType,
-  lookingForAJob: boolean,
-  lookingForAJobDescription: string | null,
-  fullName: string,
-  userId: number,
+  aboutMe: string | null
+  contacts: ContactsType
+  lookingForAJob: boolean
+  lookingForAJobDescription: string | null
+  fullName: string
+  userId: number
   photos: ProfilePhotosType
 }
 
 export type ProfilePhotosType = {
-  small: string | undefined,
+  small: string | undefined
   large: string | undefined
 }
 
 export type ContactsType = {
-  facebook: string | null,
-  website: string | null,
-  vk: string | null,
-  twitter: string | null,
-  instagram: string | null,
-  youtube: string | null,
-  github: string | null,
+  facebook: string | null
+  website: string | null
+  vk: string | null
+  twitter: string | null
+  instagram: string | null
+  youtube: string | null
+  github: string | null
   mainLink: string | null
 }
 
 export type ProfilePageType = {
-  profile: ProfileType,
+  profile: ProfileType
   userStatus: string
   isEditProfile: boolean
 }
@@ -48,7 +49,7 @@ const initialState: ProfilePageType = {
       instagram: 'string | null',
       youtube: 'string | null',
       github: 'string | null',
-      mainLink: 'string | null'
+      mainLink: 'string | null',
     },
     lookingForAJob: true,
     lookingForAJobDescription: 'string | null',
@@ -56,28 +57,28 @@ const initialState: ProfilePageType = {
     userId: 0,
     photos: {
       small: 'string | null',
-      large: 'string | null'
-    }
+      large: 'string | null',
+    },
   },
   userStatus: 'status',
-  isEditProfile: false
+  isEditProfile: false,
 }
 
 export const profileReducer = (state = initialState, action: ActionsTypes): ProfilePageType => {
   switch (action.type) {
     case 'SET-USER-PROFILE':
-      return {...state, profile: action.profile}
+      return { ...state, profile: action.profile }
     case 'SET-USER-STATUS':
-      return {...state, userStatus: action.status}
+      return { ...state, userStatus: action.status }
     case 'SET-IS-EDIT-PROFILE':
-      return {...state, isEditProfile: action.isEditProfile}
+      return { ...state, isEditProfile: action.isEditProfile }
     case 'SET-USER-PHOTO':
       return {
         ...state,
-        profile: {...state.profile, photos: action.photos}
+        profile: { ...state.profile, photos: action.photos },
       }
     default:
-      return state;
+      return state
   }
 }
 
@@ -86,39 +87,38 @@ export const profileReducer = (state = initialState, action: ActionsTypes): Prof
 export const setUserProfile = (profile: ProfileType) => {
   return {
     type: 'SET-USER-PROFILE',
-    profile
+    profile,
   } as const
 }
 
 export const setIsEditProfile = (isEditProfile: boolean) => {
   return {
     type: 'SET-IS-EDIT-PROFILE',
-    isEditProfile
+    isEditProfile,
   } as const
 }
 
 export const setUserStatus = (status: string) => {
   return {
     type: 'SET-USER-STATUS',
-    status
+    status,
   } as const
 }
 
 export const setPhotos = (photos: any) => {
   return {
     type: 'SET-USER-PHOTO',
-    photos
+    photos,
   } as const
 }
 
 //Thunks
 
 export const savePhotoTC = (file: File) => (dispatch: Dispatch) => {
-  profileAPI.savePhoto(file)
-    .then(response => {
-      console.log(response)
-      dispatch(setPhotos(response.data.photos))
-    })
+  profileAPI.savePhoto(file).then(response => {
+    console.log(response)
+    dispatch(setPhotos(response.data.photos))
+  })
 }
 
 export const setUserProfileTC = (userID: string | null) => (dispatch: Dispatch) => {
@@ -139,15 +139,18 @@ export const updateUserStatusTC = (status: string) => (dispatch: Dispatch) => {
   })
 }
 
-export const updateProfileDataTC = (data: ProfileDataEditFormType) => (dispatch: AppDispatchType, getState: () => StateType) => {
-  const userId = getState().auth.userID
-  profileAPI.saveProfileData(data).then(response => {
-    if (response.resultCode === 0) {
-      dispatch(setUserProfileTC(userId))
-      dispatch(setIsEditProfile(false))
-    } else {
-      const message = response.messages.length ? response.messages[0] : 'Something went wrong'
-      dispatch(stopSubmit('profile-contacts', {_error: message}))
-    }
-  })
-}
+export const updateProfileDataTC =
+  (data: ProfileDataEditFormType) => (dispatch: AppDispatchType, getState: () => StateType) => {
+    const userId = getState().auth.userID
+
+    profileAPI.saveProfileData(data).then(response => {
+      if (response.resultCode === 0) {
+        dispatch(setUserProfileTC(userId))
+        dispatch(setIsEditProfile(false))
+      } else {
+        const message = response.messages.length ? response.messages[0] : 'Something went wrong'
+
+        dispatch(stopSubmit('profile-contacts', { _error: message }))
+      }
+    })
+  }

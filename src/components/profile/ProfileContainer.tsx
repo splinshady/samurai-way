@@ -1,21 +1,26 @@
-import React from 'react';
-import {connect} from "react-redux";
-import Profile from "./Profile";
-import {StateType} from "../../state/redux-store";
+import React, { Component } from 'react'
+
+import { connect } from 'react-redux'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
+import { compose } from 'redux'
+
+import WithAuthRedirect from '../../hoc/withAuthRedirect'
 import {
   ProfileType,
-  savePhotoTC, setIsEditProfile,
+  savePhotoTC,
+  setIsEditProfile,
   setUserProfileTC,
-  setUserStatusTC, updateProfileDataTC,
-  updateUserStatusTC
-} from "../../state/profile-reducer";
-import {RouteComponentProps, withRouter} from "react-router-dom";
-import {compose} from "redux";
-import WithAuthRedirect from "../../hoc/withAuthRedirect";
-import {ProfileDataEditFormType} from "./profileUserAboutData/ProfileUserAboutDataEdit";
+  setUserStatusTC,
+  updateProfileDataTC,
+  updateUserStatusTC,
+} from '../../state/profile-reducer'
+import { StateType } from '../../state/redux-store'
+
+import Profile from './Profile'
+import { ProfileDataEditFormType } from './profileUserAboutData/ProfileUserAboutDataEdit'
 
 type PathParamsType = {
-  userId: string,
+  userId: string
 }
 
 type MapStateToPropsType = {
@@ -33,11 +38,14 @@ type MapDispatchPropsType = {
   setIsEditProfile: (isEditProfile: boolean) => void
   updateProfileDataTC: (data: ProfileDataEditFormType) => void
 }
-export type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & MapStateToPropsType & MapDispatchPropsType
+export type ProfileContainerPropsType = RouteComponentProps<PathParamsType> &
+  MapStateToPropsType &
+  MapDispatchPropsType
 
-class ProfileContainer extends React.Component<ProfileContainerPropsType, {}> {
+class ProfileContainer extends Component<ProfileContainerPropsType, {}> {
   updateProfile() {
     let userId: string | null = this.props.match.params.userId
+
     if (!userId) {
       userId = this.props.authorizedUserID
     }
@@ -52,16 +60,20 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType, {}> {
     this.updateProfile()
   }
 
-  componentDidUpdate(prevProps: Readonly<ProfileContainerPropsType>, prevState: Readonly<{}>, snapshot?: any) {
+  componentDidUpdate(
+    prevProps: Readonly<ProfileContainerPropsType>,
+    prevState: Readonly<{}>,
+    snapshot?: any
+  ) {
     if (this.props.match.params.userId !== prevProps.match.params.userId) {
       this.updateProfile()
     }
   }
 
   render() {
-    return <Profile {...this.props} isOwner={!this.props.match.params.userId}/>
+    return <Profile {...this.props} isOwner={!this.props.match.params.userId} />
   }
-};
+}
 
 const mapStateToProps = (state: StateType): MapStateToPropsType => {
   return {
@@ -69,7 +81,7 @@ const mapStateToProps = (state: StateType): MapStateToPropsType => {
     userStatus: state.profilePage.userStatus,
     authorizedUserID: state.auth.userID,
     isAuth: state.auth.isAuth,
-    isEditProfile: state.profilePage.isEditProfile
+    isEditProfile: state.profilePage.isEditProfile,
   }
 }
 
@@ -80,7 +92,7 @@ export default compose<React.ComponentType>(
     savePhotoTC,
     setUserStatusTC,
     updateUserStatusTC,
-    setIsEditProfile
+    setIsEditProfile,
   }),
   withRouter,
   WithAuthRedirect

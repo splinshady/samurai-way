@@ -1,8 +1,9 @@
 .profile {
-    flex-grow: 1;
-    padding: 10px;
+  flex-grow: 1;
+
+  padding: 10px;
 }
 
 .users_photo {
-    width: 200px;
+  width: 200px;
 }

@@ -1,4 +1,4 @@
-import {ProfilePageType, profileReducer, setUserProfile, setUserStatus} from "../profile-reducer";
+import { ProfilePageType, profileReducer, setUserProfile, setUserStatus } from '../profile-reducer'
 
 let startState: ProfilePageType
 
@@ -14,7 +14,7 @@ beforeEach(() => {
         instagram: null,
         youtube: null,
         github: null,
-        mainLink: null
+        mainLink: null,
       },
       lookingForAJob: true,
       lookingForAJobDescription: null,
@@ -22,17 +22,17 @@ beforeEach(() => {
       userId: 0,
       photos: {
         small: undefined,
-        large: undefined
-      }
+        large: undefined,
+      },
     },
     userStatus: '',
-    isEditProfile: false
+    isEditProfile: false,
   }
 })
 
 test('correct error message should be set', () => {
   const newProfile = {
-    aboutMe: 'i\'m enjoy',
+    aboutMe: "i'm enjoy",
     contacts: {
       facebook: null,
       website: null,
@@ -41,7 +41,7 @@ test('correct error message should be set', () => {
       instagram: null,
       youtube: null,
       github: null,
-      mainLink: null
+      mainLink: null,
     },
     lookingForAJob: true,
     lookingForAJobDescription: null,
@@ -49,18 +49,17 @@ test('correct error message should be set', () => {
     userId: 0,
     photos: {
       small: undefined,
-      large: undefined
-    }
+      large: undefined,
+    },
   }
 
   const endState = profileReducer(startState, setUserProfile(newProfile))
 
-  expect(endState.profile.aboutMe).toBe('i\'m enjoy');
+  expect(endState.profile.aboutMe).toBe("i'm enjoy")
 })
 
 test('correct status should be set', () => {
-
   const endState = profileReducer(startState, setUserStatus('angular'))
 
-  expect(endState.userStatus).toBe('angular');
+  expect(endState.userStatus).toBe('angular')
 })

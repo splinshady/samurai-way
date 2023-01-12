@@ -1,27 +1,33 @@
 .paginator_container {
-    padding: 20px 0;
-    display: flex;
-    align-self: center;
-    gap: 5px;
+  display: flex;
+  gap: 5px;
+  align-self: center;
+
+  padding: 20px 0;
 }
 
 .page_number {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30px;
-    height: 30px;
-    color: #336CFB;;
-    border: 1px solid #336CFB;
-    cursor: pointer;
-    border-radius: 50%;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  color: #336cfb;
+
+  border: 1px solid #336cfb;
+  border-radius: 50%;
 }
 
 .page_number:hover {
-    box-shadow: 0 0 20px 0px #59c2ff;
+  box-shadow: 0 0 20px 0 #59c2ff;
 }
 
 .current_page {
-    background-color: #336CFB;
-    color: white;
+  color: white;
+
+  background-color: #336cfb;
 }

@@ -1,14 +1,18 @@
-import React from 'react';
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {maxLengthCreator, requiredField} from "../../utils/validators";
-import {Input} from "../common/formControl/Input";
-import style from "./Login.module.css";
-import {Button} from "../common/Button/Button";
+import React from 'react'
+
+import { Field, InjectedFormProps, reduxForm } from 'redux-form'
+
+import { maxLengthCreator, requiredField } from '../../utils/validators'
+import { Button } from '../common/Button/Button'
+import { Input } from '../common/formControl/Input'
+
+import style from './Login.module.css'
 
 export type LoginFormType = {
   email: string
   password: string
   rememberMe: boolean
+
   captcha: string
 }
 
@@ -21,32 +25,32 @@ type LoginFormPropsType = InjectedFormProps<LoginFormType, { captcha: string | n
 export const LoginForm = (props: LoginFormPropsType) => {
   return (
     <form onSubmit={props.handleSubmit}>
-      <Field placeholder={'email'}
-             name={'email'}
-             component={Input}
-             validate={[requiredField, maxLength]}
+      <Field
+        placeholder={'email'}
+        name={'email'}
+        component={Input}
+        validate={[requiredField, maxLength]}
       />
-      <Field placeholder={'password'}
-             name={'password'}
-             type={'password'}
-             component={Input}
-             validate={[requiredField, maxLength]}
+      <Field
+        placeholder={'password'}
+        name={'password'}
+        type={'password'}
+        component={Input}
+        validate={[requiredField, maxLength]}
       />
       <span>remember me</span>
-      <Field component={Input} name={'rememberMe'} type={'checkbox'}/>
+      <Field component={Input} name={'rememberMe'} type={'checkbox'} />
 
-
-      {props.captcha && <img src={props.captcha} alt=""/>}
-      {props.captcha && <Field placeholder={''}
-                               name={'captcha'}
-                               component={Input}
-                               validate={[requiredField]}
-      />
-      }
-      {props.error &&  <span className={style.common_form_error}>Error</span>}
-      <Button type='submit'>Login</Button>
+      {props.captcha && <img src={props.captcha} alt="" />}
+      {props.captcha && (
+        <Field placeholder={''} name={'captcha'} component={Input} validate={[requiredField]} />
+      )}
+      {props.error && <span className={style.common_form_error}>Error</span>}
+      <Button type="submit">Login</Button>
     </form>
-  );
-};
+  )
+}
 
-export const ReduxLoginForm = reduxForm<LoginFormType, { captcha: string | null }>({form: 'login'})(LoginForm);
+export const ReduxLoginForm = reduxForm<LoginFormType, { captcha: string | null }>({
+  form: 'login',
+})(LoginForm)

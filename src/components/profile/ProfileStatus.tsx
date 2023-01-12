@@ -1,26 +1,25 @@
-import React, {ChangeEvent} from 'react';
+import React, { ChangeEvent, Component } from 'react'
 
 type ProfileStatusPropsType = {
   userStatus: string
   updateStatus: (status: string) => void
 }
 
-export default class ProfileStatus extends React.Component<ProfileStatusPropsType> {
-
+export default class ProfileStatus extends Component<ProfileStatusPropsType> {
   state = {
     statusEditMode: false,
-    status: this.props.userStatus
+    status: this.props.userStatus,
   }
 
   toggleEditMode = () => {
     this.setState({
-      statusEditMode: !this.state.statusEditMode
+      statusEditMode: !this.state.statusEditMode,
     })
   }
 
   onChangeStatus = (event: ChangeEvent<HTMLInputElement>) => {
     this.setState({
-      status: event.currentTarget.value
+      status: event.currentTarget.value,
     })
   }
 
@@ -29,21 +28,29 @@ export default class ProfileStatus extends React.Component<ProfileStatusPropsTyp
     this.props.updateStatus(this.state.status)
   }
 
-componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<{}>) {
+  componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<{}>) {
     if (prevProps.userStatus !== this.props.userStatus) {
       this.setState({
-        status: this.props.userStatus
+        status: this.props.userStatus,
       })
     }
-}
+  }
 
   render() {
-    return <div>
-      {
-        !this.state.statusEditMode
-          ? <span onDoubleClick={this.toggleEditMode.bind(this)}>{this.props.userStatus}</span>
-          : <input autoFocus onBlur={this.updateStatus} onChange={this.onChangeStatus} value={this.state.status} type="text"/>
-      }
-    </div>
+    return (
+      <div>
+        {!this.state.statusEditMode ? (
+          <span onDoubleClick={this.toggleEditMode.bind(this)}>{this.props.userStatus}</span>
+        ) : (
+          <input
+            autoFocus
+            onBlur={this.updateStatus}
+            onChange={this.onChangeStatus}
+            value={this.state.status}
+            type="text"
+          />
+        )}
+      </div>
+    )
   }
 }

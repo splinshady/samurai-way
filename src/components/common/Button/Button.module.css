@@ -1,12 +1,15 @@
 .button {
-    padding: 3px 10px;
-    background-color: transparent;
-    border: 1px solid #336CFB;
-    color: #336CFB;
-    border-radius: 5px;
-    cursor: pointer;
+  cursor: pointer;
+
+  padding: 3px 10px;
+
+  color: #336cfb;
+
+  background-color: transparent;
+  border: 1px solid #336cfb;
+  border-radius: 5px;
 }
 
 .button:hover {
-    box-shadow: 0 0 20px 0px #59c2ff;
+  box-shadow: 0 0 20px 0 #59c2ff;
 }
