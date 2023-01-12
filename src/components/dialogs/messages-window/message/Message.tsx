@@ -6,7 +6,6 @@ type MessagePropsType = {
   avatar: string
   name: string
   message: string
-  time: string
 }
 
 const Message = (props: MessagePropsType) => {
@@ -19,7 +18,6 @@ const Message = (props: MessagePropsType) => {
             <span className={styles.message__name}>{props.name}</span>
             <span className={styles.message__text}>{props.message}</span>
           </div>
-          <span className={styles.message__time}>{props.time}</span>
         </div>
       </div>
     </div>

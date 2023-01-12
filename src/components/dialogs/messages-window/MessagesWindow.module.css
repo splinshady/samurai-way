@@ -13,10 +13,12 @@
 }
 
 .body {
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  justify-content: end;
+
+  height: 50vh;
 }
 
 .input_container {
